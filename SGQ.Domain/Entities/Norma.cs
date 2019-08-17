@@ -8,10 +8,11 @@ namespace SGQ.Domain.Entities
     public class Norma : BaseEntity
     { 
         public string Nome { get; set; }
+        public int AmbitoId { get; set; }
         public Ambito Ambito { get; set; }
         public DateTime Data { get; set; }
-        public List<Escopo> Escopos { get; set; }
-        public List<Tema> Temas { get; set; }
+        public ICollection<NormaEscopo> NormaEscopos { get; set; }
+        public ICollection<NormaTema> NormaTemas { get; set; }
         public string Texto { get; set; }
     }
 }

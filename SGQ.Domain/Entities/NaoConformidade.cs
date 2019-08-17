@@ -11,7 +11,7 @@ namespace SGQ.Domain.Entities
         public string AnaliseCausaRaiz { get; set; }
         public string Descricao { get; set; }
         public string Evidencia { get; set; }
-        public List<Norma> Normas { get; set; }
+        public ICollection<Norma> Normas { get; set; }
         public int UsuarioResponsavelId { get; set; }
         public DateTime DataAvaliacao { get; set; }
     }
