@@ -7,20 +7,9 @@ namespace SGQ.Infra.Data.Context
 {
     public class SgqContext : DbContext
     {
-        private readonly string connectionString;
 
-        public SgqContext(string connectionString) : base()
+        public SgqContext(DbContextOptions<SgqContext> options) : base(options)
         {
-            this.connectionString = connectionString;
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-//              #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer(connectionString);
-            }
         }
 
         public DbSet<Acao> Acao { get; set; }
@@ -29,11 +18,5 @@ namespace SGQ.Infra.Data.Context
         public DbSet<NaoConformidade> NaoConformidade { get; set; }
         public DbSet<Norma> Norma { get; set; }
         public DbSet<Processo> Processo { get; set; }
-
-
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseSqlServer(ConfigurationManager<T>.ConnectionStrings["SQGDataBase"].ConnectionString,  );
-        //}
     }
 }

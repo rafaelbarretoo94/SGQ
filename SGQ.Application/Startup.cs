@@ -29,7 +29,7 @@ namespace SGQ.Application
             });
 
             services.AddDbContext<SgqContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("SQGDataBase")));
+                options.UseSqlServer(Configuration.GetConnectionString("SGQDataBase")));
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
