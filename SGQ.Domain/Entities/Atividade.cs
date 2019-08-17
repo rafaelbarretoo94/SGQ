@@ -5,14 +5,10 @@ using System.Text;
 
 namespace SGQ.Domain.Entities
 {
-    class Atividade : BaseEntity
+    public class Atividade : BaseEntity
     {
-        
         public string Nome { get; set; }
-
         public string Descricao { get; set; }        
-
-        public Ordem Ordem { get; set; }
-
+        public int Ordem { get; set; }
     }
 }

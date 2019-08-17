@@ -7,5 +7,8 @@ namespace SGQ.Domain.Entities
    public abstract class BaseEntity
     {
         public virtual int Id { get; set; }
+        public string Codigo { get; set; }
+        public DateTime? DataCadastro { get; set; }
+        public DateTime? DataModificacao { get; set; }
     }
 }

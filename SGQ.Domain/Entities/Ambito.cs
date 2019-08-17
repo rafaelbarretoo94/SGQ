@@ -4,8 +4,8 @@ using System.Text;
 
 namespace SGQ.Domain.Entities
 {
-    public class Area
+    public class Ambito : BaseEntity
     {
-        public string Nome { get; set; }                                           
+        public string Nome { get; set; }
     }
 }
