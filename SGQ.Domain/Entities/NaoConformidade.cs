@@ -12,7 +12,7 @@ namespace SGQ.Domain.Entities
         public string Descricao { get; set; }
         public string Evidencia { get; set; }
         public List<Norma> Normas { get; set; }
-        public string Responsavel { get; set; }
+        public int UsuarioResponsavelId { get; set; }
         public DateTime DataAvaliacao { get; set; }
     }
 }
