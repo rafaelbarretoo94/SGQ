@@ -31,6 +31,19 @@ namespace SGQ.Application
             services.AddDbContext<SgqContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("SGQDataBase")));
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc(
+                    "v1",
+                    new Microsoft.OpenApi.Models.OpenApiInfo
+                    {
+                        Version = "1.0",
+                        Title = "SGQ Api",
+                        Description = "Documentação da API do SQG"
+                    }
+                    );
+            }
+            );
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -52,6 +65,13 @@ namespace SGQ.Application
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "API SGQ");
+                });
+
 
             app.UseMvc(routes =>
             {

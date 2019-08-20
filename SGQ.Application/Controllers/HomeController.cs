@@ -10,20 +10,36 @@ namespace SGQ.Application.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        // GET: api/Sgq
+        [HttpGet]
+        public IEnumerable<string> Get()
         {
-            return View();
+            return new string[] { "value1", "value2" };
         }
 
-        public IActionResult Privacy()
+        // GET: api/Sgq/5
+        [HttpGet("{id}", Name = "Get")]
+        public string Get(int id)
         {
-            return View();
+            return "value";
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        // POST: api/Sgq
+        [HttpPost]
+        public void Post([FromBody] string value)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        // PUT: api/Sgq/5
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody] string value)
+        {
+        }
+
+        // DELETE: api/ApiWithActions/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
         }
     }
 }
