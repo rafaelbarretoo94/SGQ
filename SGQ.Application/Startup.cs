@@ -75,6 +75,7 @@ namespace SGQ.Application
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseAuthentication();
             app.UseCookiePolicy();
             app.UseSwagger();
 
@@ -91,7 +92,7 @@ namespace SGQ.Application
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            app.UseAuthentication();
+            
         }
     }
 }
