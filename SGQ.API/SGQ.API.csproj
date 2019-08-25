@@ -5,18 +5,10 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
-
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc2" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <ProjectReference Include="..\SGQ.Domain\SGQ.Domain.csproj" />
-    <ProjectReference Include="..\SGQ.Service\SGQ.Service.csproj" />
   </ItemGroup>
 
 </Project>
