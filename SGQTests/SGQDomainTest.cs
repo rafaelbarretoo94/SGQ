@@ -3,11 +3,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace SGQTests
 {
     [TestClass]
-    public class UnitTest1
+    public class SgqDomainTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void GetRepository()
         {
+
         }
     }
 }
