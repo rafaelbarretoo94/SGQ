@@ -7,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SGQ.Infra.Data.Context;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Identity;
+using SGQ.Domain.Entities;
 
 namespace SGQ.Application
 {
@@ -45,6 +47,11 @@ namespace SGQ.Application
                     );
             }
             );
+            services.AddDefaultIdentity<Usuario>()
+                .AddEntityFrameworkStores<SgqContext>();
+
+            services.AddScoped<SignInManager<Usuario>, SignInManager<Usuario>>();
+            services.AddScoped<UserManager<Usuario>, UserManager<Usuario>>();
 
             services.AddMvc().AddFluentValidation(fvc =>
                 fvc.RegisterValidatorsFromAssemblyContaining<Startup>());
@@ -83,6 +90,8 @@ namespace SGQ.Application
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            app.UseAuthentication();
         }
     }
 }
