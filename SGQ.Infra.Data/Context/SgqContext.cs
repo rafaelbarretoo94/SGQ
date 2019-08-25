@@ -2,10 +2,11 @@
 using System.Configuration;
 using SGQ.Domain.Entities;
 using Microsoft.IdentityModel.Protocols;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace SGQ.Infra.Data.Context
 {
-    public class SgqContext : DbContext
+    public class SgqContext : IdentityDbContext<Usuario>
     {
 
         public SgqContext(DbContextOptions<SgqContext> options) : base(options)
@@ -46,6 +47,8 @@ namespace SGQ.Infra.Data.Context
                 .HasOne(na => na.Tema)
                 .WithMany(e => e.NormaTemas)
                 .HasForeignKey(na => na.TemaId);
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
