@@ -2,45 +2,33 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SGQ.Application.Models;
+using SGQ.Service.Interfaces;
 
 namespace SGQ.Application.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class AtividadeController : ControllerBase
+    public class AtividadeController : BaseController
     {
-        // GET: api/Atividade
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly IAtividadeService atividadeService;
+
+        public AtividadeController(IAtividadeService _atividadeService)
         {
-            return new string[] { "value1", "value2" };
+            atividadeService = _atividadeService;
         }
 
-        // GET: api/Atividade/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        public IActionResult Index()
         {
-            return "value";
+            return View();
         }
 
-        // POST: api/Atividade
-        [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Create(AtividadeModel atividade)
         {
-        }
-
-        // PUT: api/Atividade/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            if(ModelState.IsValid)
+            {
+                atividadeService.Adicionar(AtividadeModel.ConverterViewParaEntity(atividade));
+            }
+            return View(atividade);
         }
     }
 }

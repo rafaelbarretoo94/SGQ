@@ -12,5 +12,11 @@ namespace SGQ.Service.Services
         public AtividadeService(IAtividadeRepository _atividadeRepository) : base(_atividadeRepository)
         {
         }
+
+        public override Atividade Adicionar(Atividade entity)
+        {
+            //if(ModelState.)
+            return base.Adicionar(entity);
+        }
     }
 }

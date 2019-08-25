@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SGQ.Infra.Data.Context;
+using FluentValidation.AspNetCore;
 
 namespace SGQ.Application
 {
@@ -44,6 +45,9 @@ namespace SGQ.Application
                     );
             }
             );
+
+            services.AddMvc().AddFluentValidation(fvc =>
+                fvc.RegisterValidatorsFromAssemblyContaining<Startup>());
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace SGQ.Domain.Entities
@@ -12,5 +13,8 @@ namespace SGQ.Domain.Entities
         public DateTime? DataModificacao { get; set; }
         public int UsuarioCadastroId { get; set; }
         public int UsuarioModificacaoId { get; set; }
+
+        [NotMapped]
+        public bool IsValid { get; set; }
     }
 }

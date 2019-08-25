@@ -6,11 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SGQ.Application.Controllers
 {
-    public class HomeController : BaseController
+    public class BaseController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
     }
 }

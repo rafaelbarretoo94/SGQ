@@ -1,8 +1,12 @@
 ﻿using FluentValidation;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace SGQ.Domain.Validators.Atividade
+namespace SGQ.Application.Validators.Atividade
 {
-    public class AtividadeAptaParaCadastroValidator : AbstractValidator<Entities.Atividade>
+    public class AtividadeAptaParaCadastroValidator : AbstractValidator<Models.AtividadeModel>
     {
         public AtividadeAptaParaCadastroValidator()
         {
