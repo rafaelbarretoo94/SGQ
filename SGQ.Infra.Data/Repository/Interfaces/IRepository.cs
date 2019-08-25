@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SGQ.Domain.Interfaces
 {
-    public interface IRepository<T> where T : BaseEntity
+    public interface IRepository<T> where T : class
     {
         void Insert(T obj);
 

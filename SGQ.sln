@@ -30,6 +30,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SGQ.Infra.Data", "SGQ.Infra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SGQ.Infra.CrossCutting", "SGQ.Infra.CrossCutting\SGQ.Infra.CrossCutting.csproj", "{64F70947-494C-4E56-9303-F7C84607BD3B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SGQTests", "SGQTests\SGQTests.csproj", "{AB5782B7-155B-4437-B84F-4A005C012D26}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,6 +58,10 @@ Global
 		{64F70947-494C-4E56-9303-F7C84607BD3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64F70947-494C-4E56-9303-F7C84607BD3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64F70947-494C-4E56-9303-F7C84607BD3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB5782B7-155B-4437-B84F-4A005C012D26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB5782B7-155B-4437-B84F-4A005C012D26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB5782B7-155B-4437-B84F-4A005C012D26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB5782B7-155B-4437-B84F-4A005C012D26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
