@@ -8,35 +8,49 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SGQ.Infra.Data.Repository
 {
-    public class Repository<T> : IRepository<T> where T : class
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        public SgqContext context { get; set; }
-        public void Insert(T obj)
+        public SgqContext context;
+        public DbSet<TEntity> DbSet;
+
+        public Repository(SgqContext context)
         {
-            context.Set<T>().Add(obj);
-            context.SaveChanges();
+            this.context = context;
+            DbSet = this.context.Set<TEntity>();
         }
 
-        public void Remove(int id)
+        public virtual TEntity Adicionar(TEntity entity)
         {
-            context.Set<T>().Remove(Select(id));
-            context.SaveChanges();
+            return DbSet.Add(entity).Entity;
         }
 
-        public T Select(int id)
+        public void Remover(int id)
         {
-            return context.Set<T>().Find(id);
+            DbSet.Remove(DbSet.Find(id));
         }
 
-        public IList<T> SelectAll()
+        public IEnumerable<TEntity> SelecionarTodos()
         {
-            return context.Set<T>().ToList();
+            return DbSet.ToList();
         }
 
-        public void Update(T obj)
+        public TEntity Atualizar(TEntity entity)
         {
-            context.Entry(obj).State = EntityState.Modified;
-            context.SaveChanges();
+            var entry = context.Entry(entity);
+            DbSet.Attach(entity);
+            entry.State = EntityState.Modified;
+            return entity;
+        }
+
+        public TEntity ObterPorId(int id)
+        {
+            return DbSet.Find(id);
+        }
+
+        public void Dispose()
+        {
+            context.Dispose();
+            GC.SuppressFinalize(this);
         }
     }
 }

@@ -1,35 +1,16 @@
-﻿using SGQ.Infra.Data.Repository.Interfaces;
+﻿using SGQ.Domain.Entities;
+using SGQ.Infra.Data.Context;
+using SGQ.Infra.Data.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace SGQ.Infra.Data.Repository
 {
-    public class EscopoRepository : IEscopoRepository
+    public class EscopoRepository : Repository<Escopo>, IEscopoRepository
     {
-        public void Insert(EscopoRepository obj)
+        public EscopoRepository(SgqContext context) : base(context)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Remove(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public EscopoRepository Select(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IList<EscopoRepository> SelectAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(EscopoRepository obj)
-        {
-            throw new NotImplementedException();
         }
     }
 }

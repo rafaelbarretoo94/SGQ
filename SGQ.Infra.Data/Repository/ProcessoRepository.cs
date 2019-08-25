@@ -1,35 +1,16 @@
-﻿using SGQ.Infra.Data.Repository.Interfaces;
+﻿using SGQ.Domain.Entities;
+using SGQ.Infra.Data.Context;
+using SGQ.Infra.Data.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace SGQ.Infra.Data.Repository
 {
-    public class ProcessoRepository : IProcessoRepository
+    public class ProcessoRepository : Repository<Processo>, IProcessoRepository
     {
-        public void Insert(ProcessoRepository obj)
+        public ProcessoRepository(SgqContext context) : base(context)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Remove(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ProcessoRepository Select(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IList<ProcessoRepository> SelectAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(ProcessoRepository obj)
-        {
-            throw new NotImplementedException();
         }
     }
 }

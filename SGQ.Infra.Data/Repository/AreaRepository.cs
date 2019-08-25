@@ -1,35 +1,16 @@
-﻿using SGQ.Infra.Data.Repository.Interfaces;
+﻿using SGQ.Domain.Entities;
+using SGQ.Infra.Data.Context;
+using SGQ.Infra.Data.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace SGQ.Infra.Data.Repository
 {
-    public class AreaRepository : IAreaRepository
+    public class AreaRepository : Repository<Area>, IAreaRepository
     {
-        public void Insert(AreaRepository obj)
+        public AreaRepository(SgqContext context) : base(context)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Remove(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public AreaRepository Select(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IList<AreaRepository> SelectAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(AreaRepository obj)
-        {
-            throw new NotImplementedException();
         }
     }
 }

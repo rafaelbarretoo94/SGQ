@@ -1,35 +1,16 @@
-﻿using SGQ.Infra.Data.Repository.Interfaces;
+﻿using SGQ.Domain.Entities;
+using SGQ.Infra.Data.Context;
+using SGQ.Infra.Data.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace SGQ.Infra.Data.Repository
 {
-    public class NaoConformidadeRepository : INaoConformidadeRepository
+    public class NaoConformidadeRepository : Repository<NaoConformidade>, INaoConformidadeRepository
     {
-        public void Insert(NaoConformidadeRepository obj)
+        public NaoConformidadeRepository(SgqContext context) : base(context)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Remove(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public NaoConformidadeRepository Select(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IList<NaoConformidadeRepository> SelectAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(NaoConformidadeRepository obj)
-        {
-            throw new NotImplementedException();
         }
     }
 }
