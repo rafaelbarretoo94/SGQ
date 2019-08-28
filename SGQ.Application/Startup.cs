@@ -15,7 +15,6 @@ using SGQ.Infra.Data.Repository;
 using SGQ.Infra.Data.Repository.Interfaces;
 using SGQ.Application.Models;
 using AutoMapper;
-
 namespace SGQ.Application
 {
     public class Startup
@@ -63,6 +62,10 @@ namespace SGQ.Application
             );
             services.AddDefaultIdentity<Usuario>()
                 .AddEntityFrameworkStores<SgqContext>();
+
+
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+           
 
             services.AddScoped<SignInManager<Usuario>, SignInManager<Usuario>>();
             services.AddScoped<UserManager<Usuario>, UserManager<Usuario>>();
