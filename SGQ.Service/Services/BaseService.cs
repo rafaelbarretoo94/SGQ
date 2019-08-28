@@ -2,6 +2,7 @@
 using SGQ.Service.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace SGQ.Service.Services
@@ -33,6 +34,11 @@ namespace SGQ.Service.Services
         public virtual void Remover(int id)
         {
             _repository.Remover(id);
+        }
+
+        public virtual List<TEntity> SelecionarTodos()
+        {
+            return _repository.SelecionarTodos().ToList();
         }
 
         public void Dispose()

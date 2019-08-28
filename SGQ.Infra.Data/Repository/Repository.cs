@@ -21,7 +21,9 @@ namespace SGQ.Infra.Data.Repository
 
         public virtual TEntity Adicionar(TEntity entity)
         {
-            return DbSet.Add(entity).Entity;
+            var newEntity = DbSet.Add(entity).Entity;
+            context.SaveChanges();
+            return newEntity;
         }
 
         public void Remover(int id)
@@ -29,7 +31,7 @@ namespace SGQ.Infra.Data.Repository
             DbSet.Remove(DbSet.Find(id));
         }
 
-        public IEnumerable<TEntity> SelecionarTodos()
+        public virtual IEnumerable<TEntity> SelecionarTodos()
         {
             return DbSet.ToList();
         }

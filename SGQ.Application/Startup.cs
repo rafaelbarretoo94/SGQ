@@ -9,6 +9,12 @@ using SGQ.Infra.Data.Context;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using SGQ.Domain.Entities;
+using SGQ.Service.Services;
+using SGQ.Service.Interfaces;
+using SGQ.Infra.Data.Repository;
+using SGQ.Infra.Data.Repository.Interfaces;
+using SGQ.Application.Models;
+using AutoMapper;
 
 namespace SGQ.Application
 {
@@ -34,6 +40,14 @@ namespace SGQ.Application
             services.AddDbContext<SgqContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("SGQDataBase")));
 
+            var config = new AutoMapper.MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<AtividadeViewModel, Atividade>();
+            });
+
+            IMapper mapper = config.CreateMapper();
+            services.AddSingleton(mapper);
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc(
@@ -52,6 +66,8 @@ namespace SGQ.Application
 
             services.AddScoped<SignInManager<Usuario>, SignInManager<Usuario>>();
             services.AddScoped<UserManager<Usuario>, UserManager<Usuario>>();
+            services.AddScoped<IAtividadeService, AtividadeService>();
+            services.AddScoped<IAtividadeRepository, AtividadeRepository>();
 
             services.AddMvc().AddFluentValidation(fvc =>
                 fvc.RegisterValidatorsFromAssemblyContaining<Startup>());

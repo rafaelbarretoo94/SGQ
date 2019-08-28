@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SGQ.Application.Validators.Atividade
 {
-    public class AtividadeAptaParaCadastroValidator : AbstractValidator<Models.AtividadeModel>
+    public class AtividadeAptaParaCadastroValidator : AbstractValidator<Models.AtividadeViewModel>
     {
         public AtividadeAptaParaCadastroValidator()
         {

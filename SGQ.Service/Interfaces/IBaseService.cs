@@ -10,5 +10,6 @@ namespace SGQ.Service.Interfaces
         TEntity ObterPorId(int id);
         TEntity Atualizar(TEntity entity);
         void Remover(int id);
+        List<TEntity> SelecionarTodos();
     }
 }

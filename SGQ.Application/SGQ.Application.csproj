@@ -7,6 +7,7 @@
 
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
     <PackageReference Include="FluentValidation" Version="8.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
@@ -18,6 +19,12 @@
   <ItemGroup>
     <ProjectReference Include="..\SGQ.Domain\SGQ.Domain.csproj" />
     <ProjectReference Include="..\SGQ.Service\SGQ.Service.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Views\NaoConformidade\" />
+    <Folder Include="Views\Processo\" />
   </ItemGroup>
 
 </Project>

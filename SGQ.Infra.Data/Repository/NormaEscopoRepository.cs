@@ -1,4 +1,5 @@
-﻿using SGQ.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using SGQ.Domain.Entities;
 using SGQ.Infra.Data.Context;
 using SGQ.Infra.Data.Repository.Interfaces;
 using System;

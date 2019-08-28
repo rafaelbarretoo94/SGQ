@@ -11,10 +11,12 @@ namespace SGQ.Domain.Entities
         public string Codigo { get; set; }
         public DateTime? DataCadastro { get; set; }
         public DateTime? DataModificacao { get; set; }
-        public int UsuarioCadastroId { get; set; }
-        public int UsuarioModificacaoId { get; set; }
+        public string UsuarioCadastroId { get; set; }
+        public string UsuarioModificacaoId { get; set; }
 
         [NotMapped]
         public bool IsValid { get; set; }
+        public Usuario UsuarioCadastro;
+        public Usuario UsuarioModificacao;
     }
 }
