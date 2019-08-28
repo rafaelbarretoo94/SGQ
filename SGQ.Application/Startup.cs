@@ -9,6 +9,8 @@ using SGQ.Infra.Data.Context;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using SGQ.Domain.Entities;
+using SGQ.Domain.Interfaces;
+using SGQ.Infra.Data.Repository;
 
 namespace SGQ.Application
 {
@@ -32,7 +34,10 @@ namespace SGQ.Application
             });
 
             services.AddDbContext<SgqContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("SGQDataBase")));
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("SGQDataBase"));
+            });
+                
 
             services.AddSwaggerGen(c =>
             {
@@ -49,6 +54,10 @@ namespace SGQ.Application
             );
             services.AddDefaultIdentity<Usuario>()
                 .AddEntityFrameworkStores<SgqContext>();
+
+
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+           
 
             services.AddScoped<SignInManager<Usuario>, SignInManager<Usuario>>();
             services.AddScoped<UserManager<Usuario>, UserManager<Usuario>>();
@@ -96,3 +105,53 @@ namespace SGQ.Application
         }
     }
 }
+//builder.ConfigureServices(services =>
+//            {
+//                // Create a new service provider.
+//                var serviceProvider = new ServiceCollection()
+//                    .AddEntityFrameworkInMemoryDatabase()
+//                    .BuildServiceProvider();
+
+//// Add a database context (ApplicationDbContext) using an in-memory 
+//// database for testing.
+//services.AddDbContext<CatalogContext>(options =>
+//                {
+//                    options.UseInMemoryDatabase("InMemoryDbForTesting");
+//                    options.UseInternalServiceProvider(serviceProvider);
+//                });
+
+//                services.AddDbContext<AppIdentityDbContext>(options =>
+//                {
+//                    options.UseInMemoryDatabase("Identity");
+//                    options.UseInternalServiceProvider(serviceProvider);
+//                });
+
+//                // Build the service provider.
+//                var sp = services.BuildServiceProvider();
+
+//                // Create a scope to obtain a reference to the database
+//                // context (ApplicationDbContext).
+//                using (var scope = sp.CreateScope())
+//                {
+//                    var scopedServices = scope.ServiceProvider;
+//var db = scopedServices.GetRequiredService<CatalogContext>();
+//var loggerFactory = scopedServices.GetRequiredService<ILoggerFactory>();
+
+//var logger = scopedServices
+//    .GetRequiredService<ILogger<CustomWebApplicationFactory<TStartup>>>();
+
+//// Ensure the database is created.
+//db.Database.EnsureCreated();
+
+//                    try
+//                    {
+//                        // Seed the database with test data.
+//                        CatalogContextSeed.SeedAsync(db, loggerFactory).Wait();
+//                    }
+//                    catch (Exception ex)
+//                    {
+//                        logger.LogError(ex, $"An error occurred seeding the " +
+//                            "database with test messages. Error: {ex.Message}");
+//                    }
+//                }
+//            });

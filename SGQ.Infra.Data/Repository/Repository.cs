@@ -8,18 +8,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SGQ.Infra.Data.Repository
 {
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+    public class Repository<T> : IRepository<T> where T : class
     {
         public SgqContext context;
-        public DbSet<TEntity> DbSet;
+        public DbSet<T> DbSet;
 
         public Repository(SgqContext context)
         {
             this.context = context;
-            DbSet = this.context.Set<TEntity>();
+            DbSet = this.context.Set<T>();
         }
 
-        public virtual TEntity Adicionar(TEntity entity)
+        public virtual T Adicionar(T entity)
         {
             return DbSet.Add(entity).Entity;
         }
@@ -29,12 +29,12 @@ namespace SGQ.Infra.Data.Repository
             DbSet.Remove(DbSet.Find(id));
         }
 
-        public IEnumerable<TEntity> SelecionarTodos()
+        public IEnumerable<T> SelecionarTodos()
         {
             return DbSet.ToList();
         }
 
-        public TEntity Atualizar(TEntity entity)
+        public T Atualizar(T entity)
         {
             var entry = context.Entry(entity);
             DbSet.Attach(entity);
@@ -42,7 +42,7 @@ namespace SGQ.Infra.Data.Repository
             return entity;
         }
 
-        public TEntity ObterPorId(int id)
+        public T ObterPorId(int id)
         {
             return DbSet.Find(id);
         }

@@ -5,12 +5,12 @@ using System.Text;
 
 namespace SGQ.Domain.Interfaces
 {
-    public interface IRepository<TEntity> : IDisposable where TEntity : class
+    public interface IRepository<T> : IDisposable where T : class
     {
-        TEntity Adicionar(TEntity entity);
-        TEntity ObterPorId(int id);
-        TEntity Atualizar(TEntity entity);
+        T Adicionar(T entity);
+        T ObterPorId(int id);
+        T Atualizar(T entity);
         void Remover(int id);
-        IEnumerable<TEntity> SelecionarTodos();
+        IEnumerable<T> SelecionarTodos();
     }
 }

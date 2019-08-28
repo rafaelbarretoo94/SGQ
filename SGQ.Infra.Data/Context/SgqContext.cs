@@ -11,6 +11,7 @@ namespace SGQ.Infra.Data.Context
 
         public SgqContext(DbContextOptions<SgqContext> options) : base(options)
         {
+
         }
 
         public DbSet<Acao> Acao { get; set; }

@@ -9,6 +9,8 @@ namespace SGQ.Infra.Data.Repository
 {
     public class AtividadeRepository : Repository<Atividade>, IAtividadeRepository
     {
+       
+
         public AtividadeRepository(SgqContext context) : base(context)
         {
         }
