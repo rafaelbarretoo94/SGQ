@@ -30,7 +30,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SGQ.Infra.Data", "SGQ.Infra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SGQ.Infra.CrossCutting", "SGQ.Infra.CrossCutting\SGQ.Infra.CrossCutting.csproj", "{64F70947-494C-4E56-9303-F7C84607BD3B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SGQTests", "SGQTests\SGQTests.csproj", "{AD93782D-CF6A-4FC9-A1C0-50F2583ECA66}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SGQTest", "SGQTest\SGQTest.csproj", "{7D0CFE46-F44B-412C-8BCE-6509C75D00F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,10 +58,10 @@ Global
 		{64F70947-494C-4E56-9303-F7C84607BD3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64F70947-494C-4E56-9303-F7C84607BD3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64F70947-494C-4E56-9303-F7C84607BD3B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AD93782D-CF6A-4FC9-A1C0-50F2583ECA66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AD93782D-CF6A-4FC9-A1C0-50F2583ECA66}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AD93782D-CF6A-4FC9-A1C0-50F2583ECA66}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AD93782D-CF6A-4FC9-A1C0-50F2583ECA66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D0CFE46-F44B-412C-8BCE-6509C75D00F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D0CFE46-F44B-412C-8BCE-6509C75D00F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D0CFE46-F44B-412C-8BCE-6509C75D00F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D0CFE46-F44B-412C-8BCE-6509C75D00F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
