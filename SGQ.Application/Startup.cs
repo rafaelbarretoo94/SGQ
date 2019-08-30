@@ -15,6 +15,8 @@ using SGQ.Infra.Data.Repository;
 using SGQ.Infra.Data.Repository.Interfaces;
 using SGQ.Application.Models;
 using AutoMapper;
+using SGQ.Domain.Interfaces;
+
 namespace SGQ.Application
 {
     public class Startup
