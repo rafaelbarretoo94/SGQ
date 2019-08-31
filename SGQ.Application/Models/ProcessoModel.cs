@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SGQ.Application.Models
 {
-    public class ProcessoModel
+    public class ProcessoModel :BaseModel
     {
         public string Nome { get; set; }
         public int Periodo { get; set; } // Deve ser convertido em enum

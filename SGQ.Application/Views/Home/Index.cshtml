@@ -5,3 +5,20 @@
 @{
     ViewData["Title"] = "Página Inicial";
 }
+
+
+<div class="row">
+    <div class="col-md-4">
+      
+        @Html.ActionLink("Atividades", "Index", "Atividade", null, new { @class = "btn btn-primary" })
+    </div>
+    <div class="col-md-4">
+    
+        @Html.ActionLink("Não Conformidades", "Index", "NaoConformidade", null, new { @class = "btn btn-primary" })
+    </div>
+    <div class="col-md-4">
+     
+        @Html.ActionLink("Processo", "Index", "Processo", null, new { @class = "btn btn-primary" })
+    </div>
+</div>
+

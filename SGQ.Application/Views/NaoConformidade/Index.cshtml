@@ -1,0 +1,104 @@
+﻿@model IEnumerable<NaoConformidadeModel>
+
+@{
+    ViewData["Title"] = "Não Conformidade ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Não Conformidades</h1>
+
+<p>
+    <a asp-action="Create">Criar Não Conformidade</a>
+    
+        @*@Html.ActionLink("Não Conformidades", "Index", "NaoConformidade", null, new { @class = "btn btn-primary" })*@
+</p>
+<table class="table" border="1">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoConformidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProcessoId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AnaliseCausaRaiz)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Evidencia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UsuarioResponsavelId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataAvaliacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Codigo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataCadastro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataModificacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UsuarioCadastroId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UsuarioModificacaoId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoConformidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProcessoId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AnaliseCausaRaiz)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Evidencia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UsuarioResponsavelId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataAvaliacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Codigo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataCadastro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataModificacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UsuarioCadastroId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UsuarioModificacaoId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Deletar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

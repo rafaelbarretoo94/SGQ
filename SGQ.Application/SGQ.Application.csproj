@@ -21,10 +21,4 @@
     <ProjectReference Include="..\SGQ.Service\SGQ.Service.csproj" />
   </ItemGroup>
 
-
-  <ItemGroup>
-    <Folder Include="Views\NaoConformidade\" />
-    <Folder Include="Views\Processo\" />
-  </ItemGroup>
-
 </Project>

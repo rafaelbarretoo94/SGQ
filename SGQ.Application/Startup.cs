@@ -44,6 +44,8 @@ namespace SGQ.Application
             var config = new AutoMapper.MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<AtividadeViewModel, Atividade>();
+                cfg.CreateMap<NaoConformidadeModel, NaoConformidade>();
+                cfg.CreateMap<ProcessoModel, Processo>();
             });
 
             IMapper mapper = config.CreateMapper();
@@ -72,7 +74,11 @@ namespace SGQ.Application
             services.AddScoped<SignInManager<Usuario>, SignInManager<Usuario>>();
             services.AddScoped<UserManager<Usuario>, UserManager<Usuario>>();
             services.AddScoped<IAtividadeService, AtividadeService>();
+            services.AddScoped<INaoConformidadeService, NaoConformidadeService>();
+            services.AddScoped<IProcessoService, ProcessoService>();
             services.AddScoped<IAtividadeRepository, AtividadeRepository>();
+            services.AddScoped<INaoConformidadeRepository, NaoConformidadeRepository>();
+            services.AddScoped<IProcessoRepository, ProcessoRepository>();
 
             services.AddMvc().AddFluentValidation(fvc =>
                 fvc.RegisterValidatorsFromAssemblyContaining<Startup>());
