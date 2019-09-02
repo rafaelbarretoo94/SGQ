@@ -1,75 +1,109 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SGQ.Application.Models;
 using SGQ.Domain.Entities;
 using SGQ.Service.Interfaces;
-using System.Collections.Generic;
+using SGQ.Service.Services;
 
 namespace SGQ.Application.Controllers
 {
-    [Authorize]
-    [Route("api/[controller]")]
-    [ApiController]
     public class NaoConformidadeController : BaseController
     {
+
         private readonly INaoConformidadeService _naoConformidadeService;
-        public NaoConformidadeController(IMapper mapper, INaoConformidadeService naoConformidadeService) : base(mapper)
+
+        public NaoConformidadeController(IMapper mapper, INaoConformidadeService naoConformidadeService):base(mapper)
         {
             _naoConformidadeService = naoConformidadeService;
-        }
 
-        // GET: api/NaoConformidade
-        [HttpGet]
-        public ActionResult Get()
+        }
+        // GET: NaoConformidade
+        public IActionResult Index()
         {
-            return View("Index", Index());
+            var listAtividades = _naoConformidadeService.SelecionarTodos();
+            return View(_mapper.Map<IEnumerable<NaoConformidadeModel>>(listAtividades));            
         }
 
-        // GET: api/NaoConformidade/5
-        [HttpGet("{id}", Name = "GetById")]
-        public string GetById(int id)
+        // GET: NaoConformidade/Details/5
+        public IActionResult Details(int id)
         {
-            return "value";
+            return View();
         }
 
-        // POST: api/NaoConformidade
-        [HttpPost(Name ="Create")] 
+        // GET: NaoConformidade/Create
         public IActionResult Create()
         {
-            return View(); 
+            return View();
         }
 
-        // PUT: api/NaoConformidade/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
-
+        // POST: NaoConformidade/Create
         [HttpPost]
-        public ActionResult CreateNaoConformidade([FromBody] NaoConformidadeModel naoConformidadeModel)
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(IFormCollection collection)
         {
-
-            if (ModelState.IsValid)
+            try
             {
-                _naoConformidadeService.Adicionar(_mapper.Map<NaoConformidade>(naoConformidadeModel));
+                if (ModelState.IsValid)
+                {
+                    _naoConformidadeService.Adicionar(_mapper.Map<NaoConformidade>(collection));
+                }
+                return RedirectToAction("Index");                
             }
-            return RedirectToAction("Index");
-
+            catch
+            {
+                return View();
+            }
         }
 
-
-        public IEnumerable<NaoConformidadeModel> Index()
+        // GET: NaoConformidade/Edit/5
+        public ActionResult Edit(int id)
         {
-            var naoConformidades = _naoConformidadeService.SelecionarTodos();
-            return _mapper.Map<IEnumerable<NaoConformidadeModel>>(naoConformidades);
+            return View();
         }
 
+        // POST: NaoConformidade/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, IFormCollection collection)
+        {
+            try
+            {
+                // TODO: Add update logic here
+                _naoConformidadeService.Atualizar(_mapper.Map<NaoConformidade>(collection));
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: NaoConformidade/Delete/5
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        // POST: NaoConformidade/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, IFormCollection collection)
+        {
+            try
+            {
+                _naoConformidadeService.Remover(id);
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
     }
 }
