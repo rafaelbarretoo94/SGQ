@@ -10,6 +10,7 @@ namespace SGQ.Application.Models
 {
     public class NaoConformidadeModel
     {
+        
         public int Id { get; set; }
         public string Codigo { get; set; }
 
@@ -29,10 +30,10 @@ namespace SGQ.Application.Models
         public string Evidencia { get; set; }
         public ICollection<Norma> Normas { get; set; }
 
-        [Display(Name = "Usuário Responsave lId")]
+        [Display(Name = "Usuário Responsave Id")]
         public int UsuarioResponsavelId { get; set; }
 
-        [Display(Name = "  Data Avaliação ")]
+        [Display(Name = " Data Avaliação ")]
         public DateTime DataAvaliacao { get; set; }
 
         [Display(Name = " Data Cadastro ")]
