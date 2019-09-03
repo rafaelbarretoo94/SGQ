@@ -1,18 +1,16 @@
 ﻿@model IEnumerable<NaoConformidadeModel>
 
 @{
-    ViewData["Title"] = "Não Conformidade ";
+    ViewData["Title"] = "Não Conformidade";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Não Conformidades</h1>
 
 <p>
-    <a asp-action="Create">Criar Não Conformidade</a>
-    
-        @*@Html.ActionLink("Não Conformidades", "Index", "NaoConformidade", null, new { @class = "btn btn-primary" })*@
+    <a asp-action="Create">Criar nova</a>
 </p>
-<table class="table" border="1">
+<table class="table container-fluid">
     <thead>
         <tr>
             <th>
@@ -94,9 +92,9 @@
                 @Html.DisplayFor(modelItem => item.UsuarioModificacaoId)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Deletar</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }

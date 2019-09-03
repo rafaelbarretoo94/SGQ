@@ -1,4 +1,5 @@
 ﻿using SGQ.Domain.Interfaces;
+using SGQ.Infra.Data.Context;
 using SGQ.Service.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,15 +11,20 @@ namespace SGQ.Service.Services
     public class BaseService<TEntity> : IBaseService<TEntity> where TEntity : class 
     {
         protected readonly IRepository<TEntity> _repository;
+        private readonly SgqContext _sgqContext;
 
-        public BaseService(IRepository<TEntity> repository)
+        public BaseService(IRepository<TEntity> repository,SgqContext sgqContext)
         {
             _repository = repository;
+            _sgqContext = sgqContext;
+            
         }
 
         public virtual TEntity Adicionar(TEntity entity)
         {
-            return _repository.Adicionar(entity);
+            var result = _repository.Adicionar(entity);
+            _sgqContext.SaveChanges();
+            return result;
         }
 
         public virtual TEntity ObterPorId(int id)
@@ -34,6 +40,7 @@ namespace SGQ.Service.Services
         public virtual void Remover(int id)
         {
             _repository.Remover(id);
+            _sgqContext.SaveChanges();
         }
 
         public virtual IEnumerable<TEntity> SelecionarTodos()

@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Configuration;
 using SGQ.Domain.Entities;
-using Microsoft.IdentityModel.Protocols;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace SGQ.Infra.Data.Context
