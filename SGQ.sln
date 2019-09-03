@@ -30,7 +30,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SGQ.Infra.Data", "SGQ.Infra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SGQ.Infra.CrossCutting", "SGQ.Infra.CrossCutting\SGQ.Infra.CrossCutting.csproj", "{64F70947-494C-4E56-9303-F7C84607BD3B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SGQTest", "SGQTest\SGQTest.csproj", "{7D0CFE46-F44B-412C-8BCE-6509C75D00F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SGQTest", "SGQTest\SGQTest.csproj", "{7D0CFE46-F44B-412C-8BCE-6509C75D00F6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FB4A83BE-C0D5-4FD1-8BA7-FA474957A70F}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
