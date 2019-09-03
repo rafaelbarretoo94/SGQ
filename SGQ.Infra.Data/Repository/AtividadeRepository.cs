@@ -19,17 +19,25 @@ namespace SGQ.Infra.Data.Repository
 
         public override IEnumerable<Atividade> SelecionarTodos()
         {
-            return (from atividade in context.Atividade
-                   join user in context.Users on atividade.UsuarioCadastroId equals user.Id
-                   select new Atividade
-                   {
-                       Nome = atividade.Nome,
-                       Descricao = atividade.Descricao,
-                       Ordem = atividade.Ordem,
-                       UsuarioCadastro = user,
-                       DataCadastro = atividade.DataCadastro
+            var listAtividades = context.Atividade;
 
-                   }).AsEnumerable();
+            foreach(var atividade in listAtividades)
+            {
+                atividade.UsuarioCadastro = new Usuario();
+                atividade.UsuarioModificacao = new Usuario();
+
+                atividade.UsuarioCadastro.Email = context.Users
+                    .Where(x => x.Id == atividade.UsuarioCadastroId)
+                    .Select(x => x.Email)
+                    .FirstOrDefault();
+
+                atividade.UsuarioModificacao.Email = context.Users
+                    .Where(x => x.Id == atividade.UsuarioModificacaoId)
+                    .Select(x => x.Email)
+                    .FirstOrDefault();
+            }
+
+            return listAtividades;
         }
     }
 }

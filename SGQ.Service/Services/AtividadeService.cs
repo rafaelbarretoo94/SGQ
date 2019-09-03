@@ -1,4 +1,5 @@
 ﻿using SGQ.Domain.Entities;
+using SGQ.Infra.Data.Repository;
 using SGQ.Infra.Data.Repository.Interfaces;
 using SGQ.Service.Interfaces;
 using System;
@@ -15,7 +16,8 @@ namespace SGQ.Service.Services
 
         public override Atividade Adicionar(Atividade entity)
         {
-            //if(ModelState.)
+            entity.DataCadastro = DateTime.Now;
+            entity.DataModificacao = DateTime.Now;
             return base.Adicionar(entity);
         }
     }

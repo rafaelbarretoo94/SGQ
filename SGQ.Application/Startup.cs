@@ -16,6 +16,7 @@ using SGQ.Infra.Data.Repository.Interfaces;
 using SGQ.Application.Models;
 using AutoMapper;
 using SGQ.Domain.Interfaces;
+using System.Collections.Generic;
 
 namespace SGQ.Application
 {
@@ -44,6 +45,7 @@ namespace SGQ.Application
             var config = new AutoMapper.MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<AtividadeViewModel, Atividade>();
+                cfg.CreateMap<Atividade, AtividadeViewModel>();
                 cfg.CreateMap<NaoConformidadeModel, NaoConformidade>();
                 cfg.CreateMap<ProcessoModel, Processo>();
             });

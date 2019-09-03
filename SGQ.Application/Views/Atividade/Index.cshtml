@@ -5,39 +5,33 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Atividades</h1>
+<h2>Atividades</h2>
 
 <p>
-    <a asp-action="Create">Nova Atividade</a>
+    <a asp-action="Create" class="btn btn-dark" role="button">Nova Atividade</a>
 </p>
 @if (Model.Any())
 {
-    <table class="table">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Nome)
+                    Nome
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Descricao)
+                    Descrição
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Ordem)
+                    Cadastro
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Codigo)
+                    Atualização
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.DataCadastro)
+                    Cadastrado por
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.DataModificacao)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.NomeUsuarioCadastro)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.NomeUsuarioModificacao)
+                    Atualizado por
                 </th>
                 <th></th>
             </tr>
@@ -51,12 +45,6 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Descricao)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Ordem)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Codigo)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.DataCadastro)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -23,8 +24,22 @@ namespace SGQ.Application.Controllers
 
         public IActionResult Index()
         {
-            var listAtividades = atividadeService.SelecionarTodos();
-            return View(_mapper.Map<IEnumerable<AtividadeViewModel>>(listAtividades));
+
+            IEnumerable<Atividade> listAtividades = atividadeService.SelecionarTodos();
+            IEnumerable<AtividadeViewModel> listAtividadeViewModel = _mapper.Map<IEnumerable<Atividade>, IEnumerable<AtividadeViewModel>>(listAtividades);
+         
+            foreach (var atividadeViewModel in listAtividadeViewModel)
+            {
+                atividadeViewModel.NomeUsuarioCadastro = listAtividades
+                    .Where(x => x.Id == atividadeViewModel.Id)
+                    .Select(y => y.UsuarioCadastro.Email).FirstOrDefault();
+
+                atividadeViewModel.NomeUsuarioModificacao = listAtividades
+                    .Where(x => x.Id == atividadeViewModel.Id)
+                    .Select(y => y.UsuarioModificacao.Email).FirstOrDefault();
+            }
+
+            return View(listAtividadeViewModel);
         }
 
         public IActionResult Create()
@@ -37,7 +52,12 @@ namespace SGQ.Application.Controllers
         {
             if (ModelState.IsValid)
             {
-                atividadeService.Adicionar(_mapper.Map<Atividade>(atividade));
+                var entityAtividade = _mapper.Map<Atividade>(atividade);
+                var usuarioAtualId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+                entityAtividade.UsuarioCadastroId = usuarioAtualId;
+                entityAtividade.UsuarioModificacaoId = usuarioAtualId;
+                atividadeService.Adicionar(entityAtividade);
             }
             return RedirectToAction("Index");
         }

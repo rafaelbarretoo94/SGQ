@@ -9,7 +9,7 @@ namespace SGQ.Service.Services
 {
     public class BaseService<TEntity> : IBaseService<TEntity> where TEntity : class 
     {
-        private readonly IRepository<TEntity> _repository;
+        protected readonly IRepository<TEntity> _repository;
 
         public BaseService(IRepository<TEntity> repository)
         {
@@ -36,9 +36,9 @@ namespace SGQ.Service.Services
             _repository.Remover(id);
         }
 
-        public virtual List<TEntity> SelecionarTodos()
+        public virtual IEnumerable<TEntity> SelecionarTodos()
         {
-            return _repository.SelecionarTodos().ToList();
+            return _repository.SelecionarTodos().AsEnumerable();
         }
 
         public void Dispose()
