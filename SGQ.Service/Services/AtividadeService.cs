@@ -1,4 +1,5 @@
 ﻿using SGQ.Domain.Entities;
+using SGQ.Infra.Data.Context;
 using SGQ.Infra.Data.Repository.Interfaces;
 using SGQ.Service.Interfaces;
 using System;
@@ -9,7 +10,9 @@ namespace SGQ.Service.Services
 {
     public class AtividadeService : BaseService<Atividade>, IAtividadeService
     {
-        public AtividadeService(IAtividadeRepository _atividadeRepository) : base(_atividadeRepository)
+        private static readonly SgqContext _sgqContext;
+        private static readonly IAtividadeRepository _atividadeRepository;
+        public AtividadeService() : base(_atividadeRepository,_sgqContext)
         {
         }
 

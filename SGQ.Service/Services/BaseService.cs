@@ -4,27 +4,23 @@ using SGQ.Service.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace SGQ.Service.Services
 {
-    public class BaseService<TEntity> : IBaseService<TEntity> where TEntity : class 
+    public class BaseService<TEntity> : IBaseService<TEntity> where TEntity : class
     {
         private readonly IRepository<TEntity> _repository;
         private readonly SgqContext _sgqContext;
 
-        public BaseService(IRepository<TEntity> repository,SgqContext sgqContext)
+        public BaseService(IRepository<TEntity> repository, SgqContext sgqContext)
         {
             _repository = repository;
             _sgqContext = sgqContext;
-            
         }
 
         public virtual TEntity Adicionar(TEntity entity)
         {
-            var result = _repository.Adicionar(entity);
-            _sgqContext.SaveChanges();
-            return result;
+            return _repository.Adicionar(entity);
         }
 
         public virtual TEntity ObterPorId(int id)
