@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SGQ.Application.Models
 {
-    public class ProcessoModel :BaseModel
+    public class ProcessoViewModel : BaseViewModel
     {
         public string Nome { get; set; }
         [Display(Name ="Período")]
