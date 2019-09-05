@@ -7,6 +7,7 @@ namespace SGQ.Application.Models
     public class AtividadeViewModel : BaseViewModel
     {
         public string Nome { get; set; }
+        [Display(Name = "Processo")]
         public int ProcessoId { get; set; }
         public Processo Processo { get; set; }
         public int Ordem { get; set; }
