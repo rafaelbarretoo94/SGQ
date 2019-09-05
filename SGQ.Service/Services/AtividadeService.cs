@@ -10,7 +10,7 @@ namespace SGQ.Service.Services
 {
     public class AtividadeService : BaseService<Atividade>, IAtividadeService
     {
-        public AtividadeService(IAtividadeRepository _atividadeRepository) : base(_atividadeRepository)
+        public AtividadeService(IAtividadeRepository atividadeRepository) : base(atividadeRepository)
         {
         }
 

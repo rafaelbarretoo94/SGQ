@@ -15,17 +15,21 @@ namespace SGQ.Application.Controllers
     [Authorize]
     public class AtividadeController : BaseController
     {
-        private readonly IAtividadeService atividadeService;
+        private readonly IAtividadeService _atividadeService;
+        private readonly IProcessoService _processoService;
 
-        public AtividadeController(IMapper mapper, IAtividadeService _atividadeService) : base(mapper)
+        public AtividadeController(IMapper mapper, 
+            IAtividadeService atividadeService,
+            IProcessoService processoService) : base(mapper)
         {
-            atividadeService = _atividadeService;
+            _processoService = processoService;
+            _atividadeService = atividadeService;
         }
 
         public IActionResult Index()
         {
 
-            IEnumerable<Atividade> listAtividades = atividadeService.SelecionarTodos();
+            IEnumerable<Atividade> listAtividades = _atividadeService.SelecionarTodos();
             IEnumerable<AtividadeViewModel> listAtividadeViewModel = _mapper.Map<IEnumerable<Atividade>, IEnumerable<AtividadeViewModel>>(listAtividades);
          
             foreach (var atividadeViewModel in listAtividadeViewModel)
@@ -44,10 +48,14 @@ namespace SGQ.Application.Controllers
 
         public IActionResult Create()
         {
+            var listProcessos = _processoService.SelecionarTodos();
+            ViewBag.listProcessos = listProcessos.Select(x => new { x.Id, x.Nome });
+
             return View();
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(AtividadeViewModel atividade)
         {
             if (ModelState.IsValid)
@@ -57,9 +65,10 @@ namespace SGQ.Application.Controllers
 
                 entityAtividade.UsuarioCadastroId = usuarioAtualId;
                 entityAtividade.UsuarioModificacaoId = usuarioAtualId;
-                atividadeService.Adicionar(entityAtividade);
+                _atividadeService.Adicionar(entityAtividade);
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            return View();
         }
     }
 }

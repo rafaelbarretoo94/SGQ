@@ -9,7 +9,7 @@ namespace SGQ.Service.Services
 {
     public class ProcessoService : BaseService<Processo>, IProcessoService
     {
-        public ProcessoService(IProcessoRepository _processoRepository) : base(_processoRepository)
+        public ProcessoService(IProcessoRepository processoRepository) : base(processoRepository)
         {
         }
     }

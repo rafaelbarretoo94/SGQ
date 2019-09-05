@@ -9,7 +9,7 @@ namespace SGQ.Service.Services
 {
     public class NaoConformidadeService : BaseService<NaoConformidade>, INaoConformidadeService
     {
-        public NaoConformidadeService(INaoConformidadeRepository _naoConformidadeRepository) : base(_naoConformidadeRepository)
+        public NaoConformidadeService(INaoConformidadeRepository naoConformidadeRepository) : base(naoConformidadeRepository)
         {
 
         }

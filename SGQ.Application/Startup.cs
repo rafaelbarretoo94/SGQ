@@ -47,7 +47,8 @@ namespace SGQ.Application
                 cfg.CreateMap<AtividadeViewModel, Atividade>();
                 cfg.CreateMap<Atividade, AtividadeViewModel>();
                 cfg.CreateMap<NaoConformidadeModel, NaoConformidade>();
-                cfg.CreateMap<ProcessoModel, Processo>();
+                cfg.CreateMap<ProcessoViewModel, Processo>();
+                cfg.CreateMap<Processo, ProcessoViewModel>();
             });
 
             IMapper mapper = config.CreateMapper();
@@ -78,9 +79,11 @@ namespace SGQ.Application
             services.AddScoped<IAtividadeService, AtividadeService>();
             services.AddScoped<INaoConformidadeService, NaoConformidadeService>();
             services.AddScoped<IProcessoService, ProcessoService>();
+            services.AddScoped<IEnumBaseService, EnumBaseService>();
             services.AddScoped<IAtividadeRepository, AtividadeRepository>();
             services.AddScoped<INaoConformidadeRepository, NaoConformidadeRepository>();
             services.AddScoped<IProcessoRepository, ProcessoRepository>();
+            services.AddScoped<IEnumBaseRepository, EnumBaseRepository>();
 
             services.AddMvc().AddFluentValidation(fvc =>
                 fvc.RegisterValidatorsFromAssemblyContaining<Startup>());

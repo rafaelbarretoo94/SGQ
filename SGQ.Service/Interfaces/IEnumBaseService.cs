@@ -5,7 +5,8 @@ using System.Text;
 
 namespace SGQ.Service.Interfaces
 {
-    public interface IAtividadeService : IBaseService<Atividade>
+    public interface IEnumBaseService : IBaseService<EnumBase>
     {
+        IEnumerable<EnumBase> ObterEnumBasePorTipo(string tipoEnum);
     }
 }

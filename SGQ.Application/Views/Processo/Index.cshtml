@@ -1,16 +1,16 @@
-﻿@model IEnumerable<ProcessoModel>
+﻿@model IEnumerable<ProcessoViewModel>
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Processo</h1>
+<h2><i class="fas fa-project-diagram"></i> Processos</h2>
 
 <p>
-    <a asp-action="Create">Criar Nova</a>
+    <a asp-action="Create" class="btn btn-dark" role="button"><i class="far fa-plus-square"></i> Novo Processo</a>
 </p>
-<table class="table container">
+<table class="table table-striped table-bordered">
     <thead>
         <tr>
             <th>
@@ -30,15 +30,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DataModificacao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UsuarioCadastroId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UsuarioModificacaoId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsValid)
             </th>
             <th></th>
         </tr>
@@ -63,15 +54,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DataModificacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UsuarioCadastroId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UsuarioModificacaoId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsValid)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |

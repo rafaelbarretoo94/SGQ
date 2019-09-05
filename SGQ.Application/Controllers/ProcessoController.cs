@@ -1,63 +1,62 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SGQ.Application.Models;
 using SGQ.Domain.Entities;
 using SGQ.Service.Interfaces;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SGQ.Application.Controllers
 {
+    [Authorize]
     public class ProcessoController : BaseController
     {
-
         private readonly IProcessoService _processoService;
+        private readonly IEnumBaseService _enumBaseService;
 
-        public ProcessoController(IMapper mapper, IProcessoService processoService) : base(mapper)
+        public ProcessoController(IMapper mapper,
+            IProcessoService processoService,
+            IEnumBaseService enumBaseService) : base(mapper)
         {
-
             _processoService = processoService;
-
+            _enumBaseService = enumBaseService;
         }
-        // GET: Processo
+
         public IActionResult Index()
         {
-            return View(_mapper.Map<IEnumerable<ProcessoModel>>(_processoService.SelecionarTodos()));
+            IEnumerable<Processo> listProcessos = _processoService.SelecionarTodos();
+            IEnumerable<ProcessoViewModel> listProcessoViewModel = _mapper.Map<IEnumerable<Processo>, IEnumerable<ProcessoViewModel>>(listProcessos);
+            return View(listProcessoViewModel);
         }
 
-        // GET: Processo/Details/5
         public IActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Processo/Create
         public IActionResult Create()
         {
+            IEnumerable<EnumBase> listPeriodicidadeProcesso = _enumBaseService.ObterEnumBasePorTipo("PeriodicidadeVerificacaoProcesso");
+            IEnumerable<EnumBase> listStatusProcesso = _enumBaseService.ObterEnumBasePorTipo("StatusProcesso");
+
+            ViewBag.lstPeriodicidadeVerificacaoProcesso = listPeriodicidadeProcesso.Select(x => new { x.Id, x.Valor }).ToList();
+            ViewBag.lstStatusProcesso = listStatusProcesso.Select(x => new { x.Id, x.Valor }).ToList();
+
             return View();
         }
 
-        // POST: Processo/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(IFormCollection collection)
+        public IActionResult Create(ProcessoViewModel processo)
         {
-            try
+            if (ModelState.IsValid)
             {
-
-                if (ModelState.IsValid)
-                {
-                    _processoService.Adicionar(_mapper.Map<Processo>(collection));
-                }
+                _processoService.Adicionar(_mapper.Map<Processo>(processo));
                 return RedirectToAction("Index");
-
-
-
             }
-            catch
-            {
-                return View();
-            }
+            return View();
         }
 
         // GET: Processo/Edit/5
@@ -72,7 +71,7 @@ namespace SGQ.Application.Controllers
         public IActionResult Edit(int id, IFormCollection collection)
         {
             try
-            { 
+            {
                 _processoService.Atualizar(_mapper.Map<Processo>(collection));
                 return RedirectToAction(nameof(Index));
             }

@@ -5,12 +5,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Não Conformidades</h1>
+<h2><i class="fas fa-exclamation-triangle"></i> Não Conformidades</h2>
 
 <p>
-    <a asp-action="Create">Criar nova</a>
+    <a asp-action="Create" class="btn btn-warning" role="button"><i class="far fa-plus-square"></i> Nova Não Conformidade</a>
 </p>
-<table class="table container-fluid">
+<table class="table table-striped">
     <thead>
         <tr>
             <th>

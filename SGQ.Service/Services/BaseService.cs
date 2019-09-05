@@ -11,19 +11,16 @@ namespace SGQ.Service.Services
     public class BaseService<TEntity> : IBaseService<TEntity> where TEntity : class 
     {
         protected readonly IRepository<TEntity> _repository;
-        private readonly SgqContext _sgqContext;
 
-        public BaseService(IRepository<TEntity> repository,SgqContext sgqContext)
+        public BaseService(IRepository<TEntity> repository)
         {
             _repository = repository;
-            _sgqContext = sgqContext;
             
         }
 
         public virtual TEntity Adicionar(TEntity entity)
         {
             var result = _repository.Adicionar(entity);
-            _sgqContext.SaveChanges();
             return result;
         }
 
@@ -40,7 +37,6 @@ namespace SGQ.Service.Services
         public virtual void Remover(int id)
         {
             _repository.Remover(id);
-            _sgqContext.SaveChanges();
         }
 
         public virtual IEnumerable<TEntity> SelecionarTodos()

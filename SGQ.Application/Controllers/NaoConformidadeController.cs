@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SGQ.Application.Models;
@@ -12,9 +13,9 @@ using SGQ.Service.Services;
 
 namespace SGQ.Application.Controllers
 {
+    [Authorize]
     public class NaoConformidadeController : BaseController
     {
-
         private readonly INaoConformidadeService _naoConformidadeService;
 
         public NaoConformidadeController(IMapper mapper, INaoConformidadeService naoConformidadeService):base(mapper)
