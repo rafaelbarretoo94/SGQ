@@ -1,4 +1,4 @@
-﻿@model IEnumerable<NaoConformidadeModel>
+﻿@model IEnumerable<NaoConformidadeViewModel>
 
 @{
     ViewData["Title"] = "Não Conformidade";
@@ -43,12 +43,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.DataModificacao)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UsuarioCadastroId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UsuarioModificacaoId)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -84,12 +78,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DataModificacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UsuarioCadastroId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UsuarioModificacaoId)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

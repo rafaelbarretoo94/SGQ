@@ -10,15 +10,15 @@ namespace SGQ.Application.Models
     public class BaseViewModel
     {
         public virtual int Id { get; set; }
+        [Display(Name = "Código")]
         public string Codigo { get; set; }
-
-        [Display(Name = "Nome Usuário Cadastro")]
+        [Display(Name = "Cadastrado por")]
         public string NomeUsuarioCadastro { get; set; }
-        [Display(Name = "Nome Usuário Modificação")]
+        [Display(Name = "Atualizado por")]
         public string NomeUsuarioModificacao { get; set; }
-        [Display(Name = "Data Cadastro")]
+        [Display(Name = "Cadastrado em")]
         public DateTime DataCadastro { get; set; }
-        [Display(Name = "Data Modificação")]
+        [Display(Name = "Última Atualização")]
         public DateTime DataModificacao { get; set; }
     }
 }

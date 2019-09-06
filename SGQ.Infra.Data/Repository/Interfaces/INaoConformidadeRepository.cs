@@ -9,6 +9,6 @@ namespace SGQ.Infra.Data.Repository.Interfaces
 {
     public interface INaoConformidadeRepository : IRepository<NaoConformidade>
     {
-       
+        void AtualizarCodigo(NaoConformidade naoConformidade);
     }
 }

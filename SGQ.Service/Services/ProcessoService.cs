@@ -12,5 +12,12 @@ namespace SGQ.Service.Services
         public ProcessoService(IProcessoRepository processoRepository) : base(processoRepository)
         {
         }
+
+        public override Processo Adicionar(Processo entity)
+        {
+            entity.DataCadastro = DateTime.Now;
+            entity.DataModificacao = DateTime.Now;
+            return base.Adicionar(entity);
+        }
     }
 }

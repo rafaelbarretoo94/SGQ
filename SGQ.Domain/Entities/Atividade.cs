@@ -11,5 +11,6 @@ namespace SGQ.Domain.Entities
         public string Descricao { get; set; }        
         public int Ordem { get; set; }
         public int ProcessoId { get; set; }
+        public Processo Processo { get; set; }
     }
 }

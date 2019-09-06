@@ -11,7 +11,13 @@ namespace SGQ.Service.Services
     {
         public NaoConformidadeService(INaoConformidadeRepository naoConformidadeRepository) : base(naoConformidadeRepository)
         {
+        }
 
+        public override NaoConformidade Adicionar(NaoConformidade entity)
+        {
+            entity.DataCadastro = DateTime.Now;
+            entity.DataModificacao = DateTime.Now;
+            return base.Adicionar(entity);
         }
     }
 }

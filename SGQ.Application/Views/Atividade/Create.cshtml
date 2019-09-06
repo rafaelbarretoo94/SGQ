@@ -31,7 +31,7 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label asp-for="ProcessoId" class="control-label"></label>
-                        <select asp-for="ProcessoId" class="form-control" asp-items="@(new SelectList(ViewBag.listProcessos, "Id", "Nome"))" required>
+                        <select asp-for="ProcessoId" class="form-control" asp-items="@(new SelectList(ViewBag.lstProcessos, "Id", "Nome"))" required>
                         </select>
                         <span asp-validation-for="ProcessoId" class="text-danger"></span>
                     </div>

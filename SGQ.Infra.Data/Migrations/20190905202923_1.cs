@@ -306,7 +306,7 @@ namespace SGQ.Infra.Data.Migrations
                     Nome = table.Column<string>(nullable: true),
                     Descricao = table.Column<string>(nullable: true),
                     Ordem = table.Column<int>(nullable: false),
-                    ProcessoId = table.Column<int>(nullable: true)
+                    ProcessoId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -316,7 +316,7 @@ namespace SGQ.Infra.Data.Migrations
                         column: x => x.ProcessoId,
                         principalTable: "Processo",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -336,7 +336,7 @@ namespace SGQ.Infra.Data.Migrations
                     AnaliseCausaRaiz = table.Column<string>(nullable: true),
                     Descricao = table.Column<string>(nullable: true),
                     Evidencia = table.Column<string>(nullable: true),
-                    UsuarioResponsavelId = table.Column<int>(nullable: false),
+                    UsuarioResponsavelId = table.Column<string>(nullable: true),
                     DataAvaliacao = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
@@ -435,7 +435,17 @@ namespace SGQ.Infra.Data.Migrations
             migrationBuilder.InsertData(
                 table: "EnumBase",
                 columns: new[] { "Id", "Codigo", "DataCadastro", "DataModificacao", "TipoEnum", "UsuarioCadastroId", "UsuarioModificacaoId", "Valor" },
-                values: new object[] { 1, null, null, null, "PeriodicidadeVerificacaoProcesso", null, null, "Diaria" });
+                values: new object[,]
+                {
+                    { 1, null, null, null, "PeriodicidadeVerificacaoProcesso", null, null, "Diaria" },
+                    { 2, null, null, null, "PeriodicidadeVerificacaoProcesso", null, null, "Semanal" },
+                    { 3, null, null, null, "PeriodicidadeVerificacaoProcesso", null, null, "Mensal" },
+                    { 4, null, null, null, "StatusProcesso", null, null, "Pré Cadastrado" },
+                    { 5, null, null, null, "StatusProcesso", null, null, "Ativo" },
+                    { 6, null, null, null, "StatusProcesso", null, null, "Cancelado" },
+                    { 7, null, null, null, "TipoNaoConformidade", null, null, "Incidente" },
+                    { 8, null, null, null, "TipoNaoConformidade", null, null, "Problema" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

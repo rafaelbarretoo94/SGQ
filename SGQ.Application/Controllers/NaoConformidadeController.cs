@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -17,94 +18,64 @@ namespace SGQ.Application.Controllers
     public class NaoConformidadeController : BaseController
     {
         private readonly INaoConformidadeService _naoConformidadeService;
+        private readonly IEnumBaseService _enumBaseService;
+        private readonly IProcessoService _processoService;
+        private readonly IUsuarioService _usuarioService;
 
-        public NaoConformidadeController(IMapper mapper, INaoConformidadeService naoConformidadeService):base(mapper)
+        public NaoConformidadeController(IMapper mapper,
+            INaoConformidadeService naoConformidadeService,
+            IEnumBaseService enumBaseService,
+            IProcessoService processoService,
+            IUsuarioService usuarioService) : base(mapper)
         {
             _naoConformidadeService = naoConformidadeService;
-
+            _enumBaseService = enumBaseService;
+            _processoService = processoService;
+            _usuarioService = usuarioService;
         }
-        // GET: NaoConformidade
+
         public IActionResult Index()
         {
-            var listAtividades = _naoConformidadeService.SelecionarTodos();
-            return View(_mapper.Map<IEnumerable<NaoConformidadeModel>>(listAtividades));            
+            var listNaoConformidades = _naoConformidadeService.SelecionarTodos();
+            IEnumerable<NaoConformidadeViewModel> listNaoConformidadeViewModel = _mapper.Map<IEnumerable<NaoConformidade>, IEnumerable<NaoConformidadeViewModel>>(listNaoConformidades);
+            return View(_mapper.Map<IEnumerable<NaoConformidadeViewModel>>(listNaoConformidadeViewModel));
         }
 
-        // GET: NaoConformidade/Details/5
-        public IActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: NaoConformidade/Create
         public IActionResult Create()
         {
+            CarregarViewBags();
             return View();
         }
 
-        // POST: NaoConformidade/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(IFormCollection collection)
+        public IActionResult Create(NaoConformidadeViewModel naoConformidade)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    _naoConformidadeService.Adicionar(_mapper.Map<NaoConformidade>(collection));
-                }
-                return RedirectToAction("Index");                
+                var entityNaoConformidade = _mapper.Map<NaoConformidade>(naoConformidade);
+                var usuarioAtualId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+                entityNaoConformidade.UsuarioCadastroId = usuarioAtualId;
+                entityNaoConformidade.UsuarioModificacaoId = usuarioAtualId;
+                _naoConformidadeService.Adicionar(entityNaoConformidade);
+                return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+
+            CarregarViewBags();
+            return View(naoConformidade);
         }
 
-        // GET: NaoConformidade/Edit/5
-        public ActionResult Edit(int id)
+        public void CarregarViewBags()
         {
-            return View();
+            var listTipoNaoConformidade = _enumBaseService.ObterEnumBasePorTipo("TipoNaoConformidade");
+            var listProcessos = _processoService.SelecionarTodos();
+            var listUsuarios = _usuarioService.SelecionarTodos();
+
+            ViewBag.lstTipoNaoConformidade = listTipoNaoConformidade.Select(x => new { x.Id, x.Valor });
+            ViewBag.lstProcessos = listProcessos.Select(x => new { x.Id, x.Nome });
+            ViewBag.lstUsuarios = listUsuarios.Select(x => new { x.Id, x.UserName });
         }
 
-        // POST: NaoConformidade/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-                _naoConformidadeService.Atualizar(_mapper.Map<NaoConformidade>(collection));
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: NaoConformidade/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: NaoConformidade/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                _naoConformidadeService.Remover(id);
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

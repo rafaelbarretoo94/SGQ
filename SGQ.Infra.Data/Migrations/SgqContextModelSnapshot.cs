@@ -228,7 +228,7 @@ namespace SGQ.Infra.Data.Migrations
 
                     b.Property<int>("Ordem");
 
-                    b.Property<int?>("ProcessoId");
+                    b.Property<int>("ProcessoId");
 
                     b.Property<string>("UsuarioCadastroId");
 
@@ -301,6 +301,18 @@ namespace SGQ.Infra.Data.Migrations
                             Id = 6,
                             TipoEnum = "StatusProcesso",
                             Valor = "Cancelado"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            TipoEnum = "TipoNaoConformidade",
+                            Valor = "Incidente"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            TipoEnum = "TipoNaoConformidade",
+                            Valor = "Problema"
                         });
                 });
 
@@ -359,7 +371,7 @@ namespace SGQ.Infra.Data.Migrations
 
                     b.Property<string>("UsuarioModificacaoId");
 
-                    b.Property<int>("UsuarioResponsavelId");
+                    b.Property<string>("UsuarioResponsavelId");
 
                     b.HasKey("Id");
 
@@ -587,9 +599,10 @@ namespace SGQ.Infra.Data.Migrations
 
             modelBuilder.Entity("SGQ.Domain.Entities.Atividade", b =>
                 {
-                    b.HasOne("SGQ.Domain.Entities.Processo")
+                    b.HasOne("SGQ.Domain.Entities.Processo", "Processo")
                         .WithMany("Atividades")
-                        .HasForeignKey("ProcessoId");
+                        .HasForeignKey("ProcessoId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SGQ.Domain.Entities.NaoConformidade", b =>

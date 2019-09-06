@@ -7,6 +7,7 @@ using SGQ.Domain.Entities;
 using SGQ.Service.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 
 namespace SGQ.Application.Controllers
 {
@@ -38,13 +39,17 @@ namespace SGQ.Application.Controllers
 
         public IActionResult Create()
         {
+            CarregarViewBags();
+            return View();
+        }
+
+        public void CarregarViewBags()
+        {
             IEnumerable<EnumBase> listPeriodicidadeProcesso = _enumBaseService.ObterEnumBasePorTipo("PeriodicidadeVerificacaoProcesso");
             IEnumerable<EnumBase> listStatusProcesso = _enumBaseService.ObterEnumBasePorTipo("StatusProcesso");
 
             ViewBag.lstPeriodicidadeVerificacaoProcesso = listPeriodicidadeProcesso.Select(x => new { x.Id, x.Valor }).ToList();
             ViewBag.lstStatusProcesso = listStatusProcesso.Select(x => new { x.Id, x.Valor }).ToList();
-
-            return View();
         }
 
         [HttpPost]
@@ -53,55 +58,17 @@ namespace SGQ.Application.Controllers
         {
             if (ModelState.IsValid)
             {
-                _processoService.Adicionar(_mapper.Map<Processo>(processo));
+                var entityProcesso = _mapper.Map<Processo>(processo);
+                var usuarioAtualId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+                entityProcesso.UsuarioCadastroId = usuarioAtualId;
+                entityProcesso.UsuarioModificacaoId = usuarioAtualId;
+
+                _processoService.Adicionar(entityProcesso);
                 return RedirectToAction("Index");
             }
             return View();
         }
 
-        // GET: Processo/Edit/5
-        public IActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Processo/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                _processoService.Atualizar(_mapper.Map<Processo>(collection));
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Processo/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Processo/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                _processoService.Remover(id);
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

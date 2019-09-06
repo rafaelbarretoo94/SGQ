@@ -49,7 +49,7 @@ namespace SGQ.Application.Controllers
         public IActionResult Create()
         {
             var listProcessos = _processoService.SelecionarTodos();
-            ViewBag.listProcessos = listProcessos.Select(x => new { x.Id, x.Nome });
+            ViewBag.lstProcessos = listProcessos.Select(x => new { x.Id, x.Nome });
 
             return View();
         }

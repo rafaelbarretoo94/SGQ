@@ -14,6 +14,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Codigo)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Nome)
             </th>
             <th>
@@ -21,9 +24,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Status)
-            </th>         
+            </th>      
             <th>
-                @Html.DisplayNameFor(model => model.Codigo)
+                @Html.DisplayNameFor(model => model.NomeUsuarioCadastro)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DataCadastro)
@@ -31,34 +34,39 @@
             <th>
                 @Html.DisplayNameFor(model => model.DataModificacao)
             </th>
-            <th></th>
+            <th>
+                Opções
+            </th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
+            <td data-th="@Html.DisplayNameFor(model => model.Codigo)">
+                <b>@Html.DisplayFor(modelItem => item.Codigo)</b>
+            </td>
+            <td data-th="@Html.DisplayNameFor(model => model.Nome)">
                 @Html.DisplayFor(modelItem => item.Nome)
             </td>
-            <td>
+            <td data-th="@Html.DisplayNameFor(model => model.Periodo)">
                 @Html.DisplayFor(modelItem => item.Periodo)
             </td>
-            <td>
+            <td data-th="@Html.DisplayNameFor(model => model.Status)">
                 @Html.DisplayFor(modelItem => item.Status)
-            </td>          
-            <td>
-                @Html.DisplayFor(modelItem => item.Codigo)
             </td>
-            <td>
+            <td data-th="@Html.DisplayNameFor(model => model.NomeUsuarioCadastro)">
+                @Html.DisplayFor(modelItem => item.NomeUsuarioCadastro)
+            </td>
+            <td data-th="@Html.DisplayNameFor(model => model.DataCadastro)">
                 @Html.DisplayFor(modelItem => item.DataCadastro)
             </td>
-            <td>
+            <td data-th="@Html.DisplayNameFor(model => model.DataModificacao)">
                 @Html.DisplayFor(modelItem => item.DataModificacao)
             </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            <td data-th="Opções">
+                <a asp-action="Edit" asp-route-id="@item.Id" data-toggle="tooltip" data-placement="top" title="Editar"><i class="far fa-edit text-dark"></i></a> |
+                <a asp-action="Details" asp-route-id="@item.Id" data-toggle="tooltip" data-placement="top" title="Ver Detalhes"><i class="fas fa-search text-dark"></i></a> |
+                <a asp-action="Delete" asp-route-id="@item.Id" data-toggle="tooltip" data-placement="top" title="Arquivar"><i class="fas fa-archive text-dark"></i></a>
             </td>
         </tr>
 }

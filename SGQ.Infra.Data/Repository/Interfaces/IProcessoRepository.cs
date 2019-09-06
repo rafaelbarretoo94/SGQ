@@ -8,5 +8,6 @@ namespace SGQ.Infra.Data.Repository.Interfaces
 {
     public interface IProcessoRepository : IRepository<Processo>
     {
+        void AtualizarCodigo(Processo processo);
     }
 }

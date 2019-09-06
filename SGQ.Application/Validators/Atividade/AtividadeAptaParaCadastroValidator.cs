@@ -17,6 +17,9 @@ namespace SGQ.Application.Validators.Atividade
             RuleFor(x => x.Descricao)
                 .NotEmpty().WithMessage("O campo \"Descrição\" da atividade é obrigatório.")
                     .Length(10, 3000).WithMessage("A descrição da atividade deve conter entre 10 e 3000 caracteres.");
+
+            RuleFor(x => x.ProcessoId)
+                .NotEmpty().WithMessage("O campo \"Processo\" da atividade é obrigatório.");
         }
     }
 }

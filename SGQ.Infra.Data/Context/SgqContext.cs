@@ -83,6 +83,18 @@ namespace SGQ.Infra.Data.Context
                 Id = 6,
                 TipoEnum = "StatusProcesso",
                 Valor = "Cancelado"
+            },
+            new EnumBase
+            {
+                Id = 7,
+                TipoEnum = "TipoNaoConformidade",
+                Valor = "Incidente"
+            },
+            new EnumBase
+            {
+                Id = 8,
+                TipoEnum = "TipoNaoConformidade",
+                Valor = "Problema"
             });
 
             base.OnModelCreating(modelBuilder);

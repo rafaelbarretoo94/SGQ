@@ -1,4 +1,4 @@
-﻿@model SGQ.Application.Models.NaoConformidadeModel
+﻿@model SGQ.Application.Models.NaoConformidadeViewModel
 
 @{
     ViewData["Title"] = "Criar";
@@ -8,55 +8,76 @@
 <h4><i class="fas fa-exclamation-triangle"></i> Cadastrar Não Conformidade</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
         <form asp-action="Criar">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-
-            <div class="form-group">
-                <label asp-for="TipoConformidade" class="control-label"></label>
-                <input asp-for="TipoConformidade" class="form-control" />
-                <span asp-validation-for="TipoConformidade" class="text-danger"></span>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="TipoConformidade" class="control-label"></label>
+                        <select asp-for="TipoConformidade" class="form-control" asp-items="@(new SelectList(ViewBag.lstTipoNaoConformidade, "Id", "Valor"))" required>
+                        </select>
+                        <span asp-validation-for="TipoConformidade" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label asp-for="ProcessoId" class="control-label"></label>
+                        <select asp-for="ProcessoId" class="form-control" asp-items="@(new SelectList(ViewBag.lstProcessos, "Id", "Nome"))" required>
+                        </select>
+                        <span asp-validation-for="ProcessoId" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Descricao" class="control-label"></label>
+                        <input asp-for="Descricao" class="form-control" />
+                        <span asp-validation-for="Descricao" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="AnaliseCausaRaiz" class="control-label"></label>
+                        <input asp-for="AnaliseCausaRaiz" class="form-control" />
+                        <span asp-validation-for="AnaliseCausaRaiz" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Evidencia" class="control-label"></label>
+                        <input asp-for="Evidencia" class="form-control" />
+                        <span asp-validation-for="Evidencia" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="UsuarioResponsavelId" class="control-label"></label>
+                        <select asp-for="UsuarioResponsavelId" class="form-control" asp-items="@(new SelectList(ViewBag.lstUsuarios, "Id", "UserName"))" required>
+                        </select>
+                        <span asp-validation-for="UsuarioResponsavelId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="DataAvaliacao" class="control-label"></label>
+                        <input asp-for="DataAvaliacao" class="form-control" />
+                        <span asp-validation-for="DataAvaliacao" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
-                <label asp-for="ProcessoId" class="control-label"></label>
-                <input asp-for="ProcessoId" class="form-control" />
-                <span asp-validation-for="ProcessoId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AnaliseCausaRaiz" class="control-label"></label>
-                <input asp-for="AnaliseCausaRaiz" class="form-control" />
-                <span asp-validation-for="AnaliseCausaRaiz" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Descricao" class="control-label"></label>
-                <input asp-for="Descricao" class="form-control" />
-                <span asp-validation-for="Descricao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Evidencia" class="control-label"></label>
-                <input asp-for="Evidencia" class="form-control" />
-                <span asp-validation-for="Evidencia" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UsuarioResponsavelId" class="control-label"></label>
-                <input asp-for="UsuarioResponsavelId" class="form-control" />
-                <span asp-validation-for="UsuarioResponsavelId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DataAvaliacao" class="control-label"></label>
-                <input asp-for="DataAvaliacao" class="form-control" />
-                <span asp-validation-for="DataAvaliacao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Salvar" class="btn btn-success" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Voltar</a>
 </div>
 
 @section Scripts {

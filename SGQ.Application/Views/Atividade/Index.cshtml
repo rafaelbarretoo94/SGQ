@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<AtividadeViewModel>
 
 @{
-    ViewData["Title"] = "Atividade";
+    ViewData["Title"] = "Atividades";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -16,54 +16,62 @@
         <thead>
             <tr>
                 <th>
-                    Nome
+                    @Html.DisplayNameFor(model => model.Codigo)
                 </th>
                 <th>
-                    Descrição
+                    @Html.DisplayNameFor(model => model.Nome)
                 </th>
                 <th>
-                    Cadastro
+                    @Html.DisplayNameFor(model => model.Descricao)
                 </th>
                 <th>
-                    Atualização
+                    @Html.DisplayNameFor(model => model.Processo)
                 </th>
                 <th>
-                    Cadastrado por
+                    @Html.DisplayNameFor(model => model.NomeUsuarioCadastro)
                 </th>
                 <th>
-                    Atualizado por
+                    @Html.DisplayNameFor(model => model.DataCadastro)
                 </th>
-                <th></th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataModificacao)
+                </th>
+                <th style="width: 8%;">
+                    Opções
+                </th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nome)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Descricao)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DataCadastro)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DataModificacao)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NomeUsuarioCadastro)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NomeUsuarioModificacao)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    </td>
-                </tr>
+            <tr>
+                <td data-th="@Html.DisplayNameFor(model => model.Codigo)">
+                    <b>@Html.DisplayFor(modelItem => item.Codigo)</b>
+                </td>
+                <td data-th="@Html.DisplayNameFor(model => model.Nome)">
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td data-th="@Html.DisplayNameFor(model => model.Descricao)">
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td data-th="@Html.DisplayNameFor(model => model.Processo)">
+                    <b>@Html.DisplayFor(modelItem => item.Processo.Nome)</b>
+                </td>
+                <td data-th="@Html.DisplayNameFor(model => model.NomeUsuarioCadastro)">
+                    @Html.DisplayFor(modelItem => item.NomeUsuarioCadastro)
+                </td>
+                <td data-th="@Html.DisplayNameFor(model => model.DataCadastro)">
+                    @Html.DisplayFor(modelItem => item.DataCadastro)
+                </td>
+                <td data-th="@Html.DisplayNameFor(model => model.DataModificacao)">
+                    @Html.DisplayFor(modelItem => item.DataModificacao)
+                </td>
+                <td data-th="Opções">
+                    <a asp-action="Edit" asp-route-id="@item.Id" data-toggle="tooltip" data-placement="top" title="Editar"><i class="far fa-edit text-dark"></i></a> |
+                    <a asp-action="Details" asp-route-id="@item.Id" data-toggle="tooltip" data-placement="top" title="Ver Detalhes"><i class="fas fa-search text-dark"></i></a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" data-toggle="tooltip" data-placement="top" title="Arquivar"><i class="fas fa-archive text-dark"></i></a>
+                </td>
+            </tr>
             }
         </tbody>
     </table>
