@@ -39,12 +39,25 @@ namespace SGQ.Infra.Data.Repository
 
             foreach (var processo in context.Processo)
             {
+                processo.UsuarioCadastro = new Usuario();
+                processo.UsuarioModificacao = new Usuario();
+
                 processo.Status = listStatusProcesso
                     .Where(x => x.Id == processo.StatusId)
                     .FirstOrDefault();
 
                 processo.Periodicidade = listPeriodicidadeProcesso
                     .Where(x => x.Id == processo.PeriodicidadeId)
+                    .FirstOrDefault();
+
+                processo.UsuarioCadastro.Email = context.Users
+                    .Where(x => x.Id == processo.UsuarioCadastroId)
+                    .Select(x => x.Email)
+                    .FirstOrDefault();
+
+                processo.UsuarioModificacao.Email = context.Users
+                    .Where(x => x.Id == processo.UsuarioModificacaoId)
+                    .Select(x => x.Email)
                     .FirstOrDefault();
             }
 

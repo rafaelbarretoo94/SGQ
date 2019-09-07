@@ -29,6 +29,18 @@ namespace SGQ.Application.Controllers
         {
             IEnumerable<Processo> listProcessos = _processoService.SelecionarTodos();
             IEnumerable<ProcessoViewModel> listProcessoViewModel = _mapper.Map<IEnumerable<Processo>, IEnumerable<ProcessoViewModel>>(listProcessos);
+
+            foreach (var processoViewModel in listProcessoViewModel)
+            {
+                processoViewModel.NomeUsuarioCadastro = listProcessos
+                    .Where(x => x.Id == processoViewModel.Id)
+                    .Select(y => y.UsuarioCadastro.Email).FirstOrDefault();
+
+                processoViewModel.NomeUsuarioModificacao = listProcessos
+                    .Where(x => x.Id == processoViewModel.Id)
+                    .Select(y => y.UsuarioModificacao.Email).FirstOrDefault();
+            }
+
             return View(listProcessoViewModel);
         }
 

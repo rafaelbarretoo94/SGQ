@@ -38,6 +38,18 @@ namespace SGQ.Application.Controllers
         {
             var listNaoConformidades = _naoConformidadeService.SelecionarTodos();
             IEnumerable<NaoConformidadeViewModel> listNaoConformidadeViewModel = _mapper.Map<IEnumerable<NaoConformidade>, IEnumerable<NaoConformidadeViewModel>>(listNaoConformidades);
+
+            foreach (var naoConformidadeViewModel in listNaoConformidadeViewModel)
+            {
+                naoConformidadeViewModel.NomeUsuarioCadastro = listNaoConformidades
+                    .Where(x => x.Id == naoConformidadeViewModel.Id)
+                    .Select(y => y.UsuarioCadastro.Email).FirstOrDefault();
+
+                naoConformidadeViewModel.NomeUsuarioModificacao = listNaoConformidades
+                    .Where(x => x.Id == naoConformidadeViewModel.Id)
+                    .Select(y => y.UsuarioModificacao.Email).FirstOrDefault();
+            }
+
             return View(_mapper.Map<IEnumerable<NaoConformidadeViewModel>>(listNaoConformidadeViewModel));
         }
 

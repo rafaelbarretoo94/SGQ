@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SGQ.Domain.Entities
 {
     public class NaoConformidade : BaseEntity
     {
         public int TipoNaoConformidadeId { get; set; }
-        public EnumBase TipoNaoConformidade { get; set; }
         public int ProcessoId { get; set; }
         public Processo Processo { get; set; }
         public string AnaliseCausaRaiz { get; set; }
@@ -15,5 +15,9 @@ namespace SGQ.Domain.Entities
         public ICollection<Norma> Normas { get; set; }
         public string UsuarioResponsavelId { get; set; }
         public DateTime DataAvaliacao { get; set; }
+
+        [NotMapped]
+        public EnumBase TipoNaoConformidade { get; set; }
+        public Usuario UsuarioResponsavel { get; set; }
     }
 }

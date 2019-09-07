@@ -23,8 +23,9 @@ namespace SGQ.Application.Models
         [Display(Name = "Evidência")]
         public string Evidencia { get; set; }
         public ICollection<Norma> Normas { get; set; }
-        [Display(Name = "Usuário Responsavel - Verificação")]
         public string UsuarioResponsavelId { get; set; }
+        [Display(Name = "Usuário Responsavel - Verificação")]
+        public Usuario UsuarioResponsavel { get; set; }
         [Display(Name = "Data Avaliação")]
         public DateTime DataAvaliacao { get; set; }     
     }

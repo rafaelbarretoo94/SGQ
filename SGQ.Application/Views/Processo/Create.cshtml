@@ -23,18 +23,18 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label asp-for="Periodo" class="control-label">Periodicidade</label>
-                        <select asp-for="Periodo" class="form-control" asp-items="@(new SelectList(ViewBag.lstPeriodicidadeVerificacaoProcesso, "Id", "Valor"))">
+                        <label asp-for="PeriodicidadeId" class="control-label">Periodicidade</label>
+                        <select asp-for="PeriodicidadeId" class="form-control" asp-items="@(new SelectList(ViewBag.lstPeriodicidadeVerificacaoProcesso, "Id", "Valor"))">
                         </select>
-                        <span asp-validation-for="Periodo" class="text-danger"></span>
+                        <span asp-validation-for="PeriodicidadeId" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
                         <label asp-for="Status" class="control-label"></label>
-                        <select asp-for="Status" class="form-control" asp-items="@(new SelectList(ViewBag.lstStatusProcesso, "Id", "Valor"))">
+                        <select asp-for="StatusId" class="form-control" asp-items="@(new SelectList(ViewBag.lstStatusProcesso, "Id", "Valor"))">
                         </select>
-                        <span asp-validation-for="Status" class="text-danger"></span>
+                        <span asp-validation-for="StatusId" class="text-danger"></span>
                     </div>
                 </div>
             </div>

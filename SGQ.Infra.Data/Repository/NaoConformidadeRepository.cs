@@ -37,12 +37,31 @@ namespace SGQ.Infra.Data.Repository
 
             foreach (var naoConformidade in listNaoConformidade)
             {
+                naoConformidade.UsuarioCadastro = new Usuario();
+                naoConformidade.UsuarioModificacao = new Usuario();
+                naoConformidade.UsuarioResponsavel = new Usuario();
+
                 naoConformidade.TipoNaoConformidade = listTipoNaoConformidade
                     .Where(x => x.Id == naoConformidade.TipoNaoConformidadeId)
                     .FirstOrDefault();
 
                 naoConformidade.Processo = context.Processo
                     .Where(x => x.Id == naoConformidade.ProcessoId)
+                    .FirstOrDefault();
+
+                naoConformidade.UsuarioCadastro.Email = context.Users
+                    .Where(x => x.Id == naoConformidade.UsuarioCadastroId)
+                    .Select(x => x.Email)
+                    .FirstOrDefault();
+
+                naoConformidade.UsuarioModificacao.Email = context.Users
+                    .Where(x => x.Id == naoConformidade.UsuarioModificacaoId)
+                    .Select(x => x.Email)
+                    .FirstOrDefault();
+
+                naoConformidade.UsuarioResponsavel.Email = context.Users
+                    .Where(x => x.Id == naoConformidade.UsuarioResponsavelId)
+                    .Select(x => x.Email)
                     .FirstOrDefault();
             }
 

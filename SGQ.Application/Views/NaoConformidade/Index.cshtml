@@ -10,81 +10,87 @@
 <p>
     <a asp-action="Create" class="btn btn-warning" role="button"><i class="far fa-plus-square"></i> Nova Não Conformidade</a>
 </p>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TipoConformidade)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProcessoId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AnaliseCausaRaiz)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descricao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Evidencia)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UsuarioResponsavelId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataAvaliacao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Codigo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataCadastro)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataModificacao)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipoConformidade)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProcessoId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AnaliseCausaRaiz)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descricao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Evidencia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UsuarioResponsavelId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataAvaliacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Codigo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataCadastro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataModificacao)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+@if (Model.Any())
+{
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Codigo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TipoNaoConformidade)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Processo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AnaliseCausaRaiz)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Descricao)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Evidencia)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UsuarioResponsavel)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataAvaliacao)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataCadastro)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataModificacao)
+                </th>
+                <th style="width: 8%;">
+                    Opções
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td data-th=" @Html.DisplayNameFor(model => model.Codigo)">
+                        <b>@Html.DisplayFor(modelItem => item.Codigo)</b>
+                    </td>
+                    <td data-th=" @Html.DisplayNameFor(model => model.TipoNaoConformidade)">
+                        @Html.DisplayFor(modelItem => item.TipoNaoConformidade.Valor)
+                    </td>
+                    <td data-th=" @Html.DisplayNameFor(model => model.Processo)">
+                        <b>@Html.DisplayFor(modelItem => item.Processo.Codigo)</b>
+                    </td>
+                    <td data-th=" @Html.DisplayNameFor(model => model.AnaliseCausaRaiz)">
+                        @Html.DisplayFor(modelItem => item.AnaliseCausaRaiz)
+                    </td>
+                    <td data-th=" @Html.DisplayNameFor(model => model.Descricao)">
+                        @Html.DisplayFor(modelItem => item.Descricao)
+                    </td>
+                    <td data-th=" @Html.DisplayNameFor(model => model.Evidencia)">
+                        @Html.DisplayFor(modelItem => item.Evidencia)
+                    </td>
+                    <td data-th=" @Html.DisplayNameFor(model => model.UsuarioResponsavel)">
+                        @Html.DisplayFor(modelItem => item.UsuarioResponsavel.Email)
+                    </td>
+                    <td data-th=" @Html.DisplayNameFor(model => model.DataAvaliacao)">
+                        @Html.DisplayFor(modelItem => item.DataAvaliacao)
+                    </td>
+                    <td data-th=" @Html.DisplayNameFor(model => model.DataCadastro)">
+                        @Html.DisplayFor(modelItem => item.DataCadastro)
+                    </td>
+                    <td data-th=" @Html.DisplayNameFor(model => model.DataModificacao)">
+                        @Html.DisplayFor(modelItem => item.DataModificacao)
+                    </td>
+                    <td data-th="Opções">
+                        <a asp-action="Edit" asp-route-id="@item.Id" data-toggle="tooltip" data-placement="top" title="Editar"><i class="far fa-edit text-dark"></i></a> |
+                        <a asp-action="Details" asp-route-id="@item.Id" data-toggle="tooltip" data-placement="top" title="Ver Detalhes"><i class="fas fa-search text-dark"></i></a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id" data-toggle="tooltip" data-placement="top" title="Arquivar"><i class="fas fa-archive text-dark"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
-    </tbody>
-</table>

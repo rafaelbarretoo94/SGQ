@@ -14,15 +14,15 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label asp-for="TipoConformidade" class="control-label"></label>
-                        <select asp-for="TipoConformidade" class="form-control" asp-items="@(new SelectList(ViewBag.lstTipoNaoConformidade, "Id", "Valor"))" required>
+                        <label asp-for="TipoNaoConformidade" class="control-label"></label>
+                        <select asp-for="TipoNaoConformidadeId" class="form-control" asp-items="@(new SelectList(ViewBag.lstTipoNaoConformidade, "Id", "Valor"))" required>
                         </select>
-                        <span asp-validation-for="TipoConformidade" class="text-danger"></span>
+                        <span asp-validation-for="TipoNaoConformidadeId" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-md-5">
                     <div class="form-group">
-                        <label asp-for="ProcessoId" class="control-label"></label>
+                        <label asp-for="Processo" class="control-label"></label>
                         <select asp-for="ProcessoId" class="form-control" asp-items="@(new SelectList(ViewBag.lstProcessos, "Id", "Nome"))" required>
                         </select>
                         <span asp-validation-for="ProcessoId" class="text-danger"></span>
