@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using SGQ.Application.Models;
 using SGQ.Domain.Entities;
 using SGQ.Service.Interfaces;
@@ -19,7 +20,8 @@ namespace SGQ.Application.Controllers
 
         public ProcessoController(IMapper mapper,
             IProcessoService processoService,
-            IEnumBaseService enumBaseService) : base(mapper)
+            IEnumBaseService enumBaseService, 
+            IConfiguration config) : base(mapper, config)
         {
             _processoService = processoService;
             _enumBaseService = enumBaseService;

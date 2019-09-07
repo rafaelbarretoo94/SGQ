@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using SGQ.Application.Models;
 using SGQ.Domain.Entities;
 using SGQ.Service.Interfaces;
@@ -20,7 +21,8 @@ namespace SGQ.Application.Controllers
 
         public AtividadeController(IMapper mapper, 
             IAtividadeService atividadeService,
-            IProcessoService processoService) : base(mapper)
+            IProcessoService processoService, 
+            IConfiguration config) : base(mapper, config)
         {
             _processoService = processoService;
             _atividadeService = atividadeService;

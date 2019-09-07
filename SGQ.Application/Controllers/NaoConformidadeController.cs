@@ -7,6 +7,8 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using SGQ.Application.Models;
 using SGQ.Domain.Entities;
 using SGQ.Service.Interfaces;
@@ -21,12 +23,14 @@ namespace SGQ.Application.Controllers
         private readonly IEnumBaseService _enumBaseService;
         private readonly IProcessoService _processoService;
         private readonly IUsuarioService _usuarioService;
+        private readonly string _api = "https://localhost:44353/api/naoconformidade";
 
         public NaoConformidadeController(IMapper mapper,
             INaoConformidadeService naoConformidadeService,
             IEnumBaseService enumBaseService,
             IProcessoService processoService,
-            IUsuarioService usuarioService) : base(mapper)
+            IUsuarioService usuarioService, 
+            IConfiguration config) : base(mapper, config)
         {
             _naoConformidadeService = naoConformidadeService;
             _enumBaseService = enumBaseService;
@@ -36,7 +40,10 @@ namespace SGQ.Application.Controllers
 
         public IActionResult Index()
         {
-            var listNaoConformidades = _naoConformidadeService.SelecionarTodos();
+            var resultTask = ClientGetAsync(_api);
+            resultTask.Wait();
+
+            var listNaoConformidades = JsonConvert.DeserializeObject<List<NaoConformidade>>(resultTask.Result);
             IEnumerable<NaoConformidadeViewModel> listNaoConformidadeViewModel = _mapper.Map<IEnumerable<NaoConformidade>, IEnumerable<NaoConformidadeViewModel>>(listNaoConformidades);
 
             foreach (var naoConformidadeViewModel in listNaoConformidadeViewModel)
@@ -70,7 +77,9 @@ namespace SGQ.Application.Controllers
 
                 entityNaoConformidade.UsuarioCadastroId = usuarioAtualId;
                 entityNaoConformidade.UsuarioModificacaoId = usuarioAtualId;
-                _naoConformidadeService.Adicionar(entityNaoConformidade);
+
+                string jsonContent = JsonConvert.SerializeObject(entityNaoConformidade);
+                var resultTask = ClientPostAsync(_api, jsonContent);
                 return RedirectToAction("Index");
             }
 
