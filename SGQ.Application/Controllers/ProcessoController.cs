@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using SGQ.Application.Models;
 using SGQ.Domain.Entities;
 using SGQ.Service.Interfaces;
@@ -17,6 +18,7 @@ namespace SGQ.Application.Controllers
     {
         private readonly IProcessoService _processoService;
         private readonly IEnumBaseService _enumBaseService;
+        private readonly string _api = "https://localhost:44334/api/processo";
 
         public ProcessoController(IMapper mapper,
             IProcessoService processoService,
@@ -29,7 +31,10 @@ namespace SGQ.Application.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Processo> listProcessos = _processoService.SelecionarTodos();
+            var resultTask = ClientGetAsync(_api);
+            resultTask.Wait();
+
+            IEnumerable<Processo> listProcessos = JsonConvert.DeserializeObject<List<Processo>>(resultTask.Result);
             IEnumerable<ProcessoViewModel> listProcessoViewModel = _mapper.Map<IEnumerable<Processo>, IEnumerable<ProcessoViewModel>>(listProcessos);
 
             foreach (var processoViewModel in listProcessoViewModel)
@@ -78,7 +83,8 @@ namespace SGQ.Application.Controllers
                 entityProcesso.UsuarioCadastroId = usuarioAtualId;
                 entityProcesso.UsuarioModificacaoId = usuarioAtualId;
 
-                _processoService.Adicionar(entityProcesso);
+                string jsonContent = JsonConvert.SerializeObject(entityProcesso);
+                var resultTask = ClientPostAsync(_api, jsonContent);
                 return RedirectToAction("Index");
             }
             return View();
