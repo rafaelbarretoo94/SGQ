@@ -17,13 +17,14 @@ namespace SGQ.Application.Controllers
     public class ProcessoController : BaseController
     {
         private readonly IEnumBaseService _enumBaseService;
-        private readonly string _api = "https://localhost:44334/api/processo";
+        private readonly string _api;
 
         public ProcessoController(IMapper mapper,
             IEnumBaseService enumBaseService, 
             IConfiguration config) : base(mapper, config)
         {
             _enumBaseService = enumBaseService;
+            _api = config["ProcessosApiEndpoint"];
         }
 
         public IActionResult Index()

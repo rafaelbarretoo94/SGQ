@@ -17,11 +17,13 @@ namespace SGQ.Application.Controllers
     [Authorize]
     public class AtividadeController : BaseController
     {
-        private readonly string _apiProcessos = "https://localhost:44334/api/processo";
-        private readonly string _api = "https://localhost:44334/api/atividade";
+        private readonly string _apiProcessos;
+        private readonly string _api;
 
         public AtividadeController(IMapper mapper, IConfiguration config) : base(mapper, config)
         {
+            _api = config["ProcessosApiAtividadeEndpoint"];
+            _apiProcessos = config["ProcessosApiEndpoint"];
         }
 
         public IActionResult Index()
