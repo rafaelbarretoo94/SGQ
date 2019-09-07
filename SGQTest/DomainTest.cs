@@ -6,7 +6,7 @@ using System;
 
 namespace SGQTest
 {
-    
+    [TestClass]
     public class DomainTest
     {
         private Mock<IRepository<Atividade>> mockAtividade;
