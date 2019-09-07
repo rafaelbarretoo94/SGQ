@@ -30,15 +30,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SGQ.Infra.Data", "SGQ.Infra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SGQ.Infra.CrossCutting", "SGQ.Infra.CrossCutting\SGQ.Infra.CrossCutting.csproj", "{64F70947-494C-4E56-9303-F7C84607BD3B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SGQTest", "SGQTest\SGQTest.csproj", "{7D0CFE46-F44B-412C-8BCE-6509C75D00F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SGQ.Tests", "SGQ.Tests\SGQ.Tests.csproj", "{7D0CFE46-F44B-412C-8BCE-6509C75D00F6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - IncidentesProblemas", "2 - IncidentesProblemas", "{921F4524-0C6F-4D82-A0B8-5EDCA10836CD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Processos", "3 - Processos", "{CCEDE66E-A29B-45E9-9B9D-A0E28A117096}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SGQ.IncidentesProblemas.API", "IncidentesProblemasAPI\SGQ.IncidentesProblemas.API.csproj", "{75992C5D-1826-4B94-8789-4082D08BCDD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SGQ.IncidentesProblemas.API", "SGQ.IncidentesProblemas.API\SGQ.IncidentesProblemas.API.csproj", "{75992C5D-1826-4B94-8789-4082D08BCDD4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SGQ.Processos.API", "ProcessosAPI\SGQ.Processos.API.csproj", "{70FF1EE6-5664-482A-AED5-35870F4FFF5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SGQ.Processos.API", "SGQ.Processos.API\SGQ.Processos.API.csproj", "{70FF1EE6-5664-482A-AED5-35870F4FFF5E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
