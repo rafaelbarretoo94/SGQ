@@ -13,11 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SGQ.Domain", "SGQ.Domain\SG
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SGQ.Service", "SGQ.Service\SGQ.Service.csproj", "{C9368AF4-64F3-4025-8450-B98FAEFCBEC4}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utils", "Utils", "{27F011DF-F7F4-470C-97F3-B4EB04353869}"
-	ProjectSection(SolutionItems) = preProject
-		Enums.cs = Enums.cs
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.1 - Data", "4.1 - Data", "{06AE05BD-1F08-4F3F-80E3-13603A992920}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.2 - CrossCutting", "4.2 - CrossCutting", "{1D332B08-0815-4C94-A7E7-92D6FFA2EB3A}"
