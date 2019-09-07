@@ -8,5 +8,6 @@ namespace SGQ.Infra.Data.Repository.Interfaces
 {
     public interface IAtividadeRepository : IRepository<Atividade>
     {
+        void AtualizarCodigo(Atividade atividade);
     }
 }

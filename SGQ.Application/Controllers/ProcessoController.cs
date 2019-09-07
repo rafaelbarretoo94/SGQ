@@ -1,108 +1,91 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using SGQ.Application.Models;
 using SGQ.Domain.Entities;
 using SGQ.Service.Interfaces;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
 
 namespace SGQ.Application.Controllers
 {
+    [Authorize]
     public class ProcessoController : BaseController
     {
+        private readonly IEnumBaseService _enumBaseService;
+        private readonly string _api = "https://localhost:44334/api/processo";
 
-        private readonly IProcessoService _processoService;
-
-        public ProcessoController(IMapper mapper, IProcessoService processoService) : base(mapper)
+        public ProcessoController(IMapper mapper,
+            IEnumBaseService enumBaseService, 
+            IConfiguration config) : base(mapper, config)
         {
-
-            _processoService = processoService;
-
+            _enumBaseService = enumBaseService;
         }
-        // GET: Processo
+
         public IActionResult Index()
         {
-            return View(_mapper.Map<IEnumerable<ProcessoModel>>(_processoService.SelecionarTodos()));
+            var resultTask = ClientGetAsync(_api);
+            resultTask.Wait();
+
+            IEnumerable<Processo> listProcessos = JsonConvert.DeserializeObject<List<Processo>>(resultTask.Result);
+            IEnumerable<ProcessoViewModel> listProcessoViewModel = _mapper.Map<IEnumerable<Processo>, IEnumerable<ProcessoViewModel>>(listProcessos);
+
+            foreach (var processoViewModel in listProcessoViewModel)
+            {
+                processoViewModel.NomeUsuarioCadastro = listProcessos
+                    .Where(x => x.Id == processoViewModel.Id)
+                    .Select(y => y.UsuarioCadastro.Email).FirstOrDefault();
+
+                processoViewModel.NomeUsuarioModificacao = listProcessos
+                    .Where(x => x.Id == processoViewModel.Id)
+                    .Select(y => y.UsuarioModificacao.Email).FirstOrDefault();
+            }
+
+            return View(listProcessoViewModel);
         }
 
-        // GET: Processo/Details/5
         public IActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Processo/Create
         public IActionResult Create()
         {
+            CarregarViewBags();
             return View();
         }
 
-        // POST: Processo/Create
+        public void CarregarViewBags()
+        {
+            IEnumerable<EnumBase> listPeriodicidadeProcesso = _enumBaseService.ObterEnumBasePorTipo("PeriodicidadeVerificacaoProcesso");
+            IEnumerable<EnumBase> listStatusProcesso = _enumBaseService.ObterEnumBasePorTipo("StatusProcesso");
+
+            ViewBag.lstPeriodicidadeVerificacaoProcesso = listPeriodicidadeProcesso.Select(x => new { x.Id, x.Valor }).ToList();
+            ViewBag.lstStatusProcesso = listStatusProcesso.Select(x => new { x.Id, x.Valor }).ToList();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(IFormCollection collection)
+        public IActionResult Create(ProcessoViewModel processo)
         {
-            try
+            if (ModelState.IsValid)
             {
+                var entityProcesso = _mapper.Map<Processo>(processo);
+                var usuarioAtualId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-                if (ModelState.IsValid)
-                {
-                    _processoService.Adicionar(_mapper.Map<Processo>(collection));
-                }
+                entityProcesso.UsuarioCadastroId = usuarioAtualId;
+                entityProcesso.UsuarioModificacaoId = usuarioAtualId;
+
+                string jsonContent = JsonConvert.SerializeObject(entityProcesso);
+                var resultTask = ClientPostAsync(_api, jsonContent);
                 return RedirectToAction("Index");
-
-
-
             }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Processo/Edit/5
-        public IActionResult Edit(int id)
-        {
             return View();
         }
 
-        // POST: Processo/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            { 
-                _processoService.Atualizar(_mapper.Map<Processo>(collection));
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Processo/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Processo/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                _processoService.Remover(id);
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

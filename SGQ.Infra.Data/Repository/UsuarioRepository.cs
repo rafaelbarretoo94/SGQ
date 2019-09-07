@@ -3,6 +3,7 @@ using SGQ.Infra.Data.Context;
 using SGQ.Infra.Data.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace SGQ.Infra.Data.Repository

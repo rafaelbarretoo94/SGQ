@@ -16,6 +16,7 @@ using SGQ.Infra.Data.Repository.Interfaces;
 using SGQ.Application.Models;
 using AutoMapper;
 using SGQ.Domain.Interfaces;
+using System.Collections.Generic;
 
 namespace SGQ.Application
 {
@@ -44,8 +45,11 @@ namespace SGQ.Application
             var config = new AutoMapper.MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<AtividadeViewModel, Atividade>();
-                cfg.CreateMap<NaoConformidadeModel, NaoConformidade>();
-                cfg.CreateMap<ProcessoModel, Processo>();
+                cfg.CreateMap<Atividade, AtividadeViewModel>();
+                cfg.CreateMap<NaoConformidadeViewModel, NaoConformidade>();
+                cfg.CreateMap<NaoConformidade, NaoConformidadeViewModel>();
+                cfg.CreateMap<ProcessoViewModel, Processo>();
+                cfg.CreateMap<Processo, ProcessoViewModel>();
             });
 
             IMapper mapper = config.CreateMapper();
@@ -67,18 +71,20 @@ namespace SGQ.Application
             services.AddDefaultIdentity<Usuario>()
                 .AddEntityFrameworkStores<SgqContext>();
 
-
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-           
 
             services.AddScoped<SignInManager<Usuario>, SignInManager<Usuario>>();
             services.AddScoped<UserManager<Usuario>, UserManager<Usuario>>();
             services.AddScoped<IAtividadeService, AtividadeService>();
             services.AddScoped<INaoConformidadeService, NaoConformidadeService>();
             services.AddScoped<IProcessoService, ProcessoService>();
+            services.AddScoped<IEnumBaseService, EnumBaseService>();
+            services.AddScoped<IUsuarioService, UsuarioService>();
             services.AddScoped<IAtividadeRepository, AtividadeRepository>();
             services.AddScoped<INaoConformidadeRepository, NaoConformidadeRepository>();
             services.AddScoped<IProcessoRepository, ProcessoRepository>();
+            services.AddScoped<IEnumBaseRepository, EnumBaseRepository>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
             services.AddMvc().AddFluentValidation(fvc =>
                 fvc.RegisterValidatorsFromAssemblyContaining<Startup>());

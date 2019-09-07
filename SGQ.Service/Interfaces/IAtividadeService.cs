@@ -7,6 +7,5 @@ namespace SGQ.Service.Interfaces
 {
     public interface IAtividadeService : IBaseService<Atividade>
     {
-
     }
 }

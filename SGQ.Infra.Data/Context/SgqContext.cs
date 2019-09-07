@@ -18,6 +18,7 @@ namespace SGQ.Infra.Data.Context
         public DbSet<NaoConformidade> NaoConformidade { get; set; }
         public DbSet<Norma> Norma { get; set; }
         public DbSet<Processo> Processo { get; set; }
+        public DbSet<EnumBase> EnumBase { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -46,6 +47,55 @@ namespace SGQ.Infra.Data.Context
                 .HasOne(na => na.Tema)
                 .WithMany(e => e.NormaTemas)
                 .HasForeignKey(na => na.TemaId);
+
+            modelBuilder.Entity<EnumBase>().HasData(new EnumBase
+            {
+                Id = 1,
+                TipoEnum = "PeriodicidadeVerificacaoProcesso",
+                Valor = "Diaria"
+            },
+            new EnumBase
+            {
+                Id = 2,
+                TipoEnum = "PeriodicidadeVerificacaoProcesso",
+                Valor = "Semanal"
+            },
+            new EnumBase
+            {
+                Id = 3,
+                TipoEnum = "PeriodicidadeVerificacaoProcesso",
+                Valor = "Mensal"
+            },
+            new EnumBase
+            {
+                Id = 4,
+                TipoEnum = "StatusProcesso",
+                Valor = "Pré Cadastrado"
+            },
+            new EnumBase
+            {
+                Id = 5,
+                TipoEnum = "StatusProcesso",
+                Valor = "Ativo"
+            },
+            new EnumBase
+            {
+                Id = 6,
+                TipoEnum = "StatusProcesso",
+                Valor = "Cancelado"
+            },
+            new EnumBase
+            {
+                Id = 7,
+                TipoEnum = "TipoNaoConformidade",
+                Valor = "Incidente"
+            },
+            new EnumBase
+            {
+                Id = 8,
+                TipoEnum = "TipoNaoConformidade",
+                Valor = "Problema"
+            });
 
             base.OnModelCreating(modelBuilder);
         }

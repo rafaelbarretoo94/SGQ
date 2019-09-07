@@ -1,5 +1,4 @@
 ﻿using SGQ.Domain.Entities;
-using SGQ.Infra.Data.Context;
 using SGQ.Infra.Data.Repository.Interfaces;
 using SGQ.Service.Interfaces;
 using System;
@@ -10,10 +9,15 @@ namespace SGQ.Service.Services
 {
     public class ProcessoService : BaseService<Processo>, IProcessoService
     {
-        private static readonly SgqContext sgqContext;
-        private static readonly IProcessoRepository _processoRepository;
-        public ProcessoService() : base(_processoRepository, sgqContext)
+        public ProcessoService(IProcessoRepository processoRepository) : base(processoRepository)
         {
+        }
+
+        public override Processo Adicionar(Processo entity)
+        {
+            entity.DataCadastro = DateTime.Now;
+            entity.DataModificacao = DateTime.Now;
+            return base.Adicionar(entity);
         }
     }
 }

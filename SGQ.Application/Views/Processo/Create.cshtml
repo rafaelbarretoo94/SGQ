@@ -1,77 +1,54 @@
-﻿@model SGQ.Application.Models.ProcessoModel
+﻿@model SGQ.Application.Models.ProcessoViewModel
 
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Criar</h1>
-
-<h4>Criar Processo </h4>
+<h4>Cadastrar Processo </h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Nome" class="control-label"></label>
-                <input asp-for="Nome" class="form-control" />
-                <span asp-validation-for="Nome" class="text-danger"></span>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label asp-for="Nome" class="control-label"></label>
+                        <input asp-for="Nome" class="form-control" />
+                        <span asp-validation-for="Nome" class="text-danger"></span>
+                    </div>
+                </div>
+                </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="PeriodicidadeId" class="control-label">Periodicidade</label>
+                        <select asp-for="PeriodicidadeId" class="form-control" asp-items="@(new SelectList(ViewBag.lstPeriodicidadeVerificacaoProcesso, "Id", "Valor"))">
+                        </select>
+                        <span asp-validation-for="PeriodicidadeId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="Status" class="control-label"></label>
+                        <select asp-for="StatusId" class="form-control" asp-items="@(new SelectList(ViewBag.lstStatusProcesso, "Id", "Valor"))">
+                        </select>
+                        <span asp-validation-for="StatusId" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
+
+
             <div class="form-group">
-                <label asp-for="Periodo" class="control-label"></label>
-                <input asp-for="Periodo" class="form-control" />
-                <span asp-validation-for="Periodo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" class="form-control" />
-                <span asp-validation-for="Status" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Codigo" class="control-label"></label>
-                <input asp-for="Codigo" class="form-control" />
-                <span asp-validation-for="Codigo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DataCadastro" class="control-label"></label>
-                <input asp-for="DataCadastro" class="form-control" />
-                <span asp-validation-for="DataCadastro" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DataModificacao" class="control-label"></label>
-                <input asp-for="DataModificacao" class="form-control" />
-                <span asp-validation-for="DataModificacao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UsuarioCadastroId" class="control-label"></label>
-                <input asp-for="UsuarioCadastroId" class="form-control" />
-                <span asp-validation-for="UsuarioCadastroId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UsuarioModificacaoId" class="control-label"></label>
-                <input asp-for="UsuarioModificacaoId" class="form-control" />
-                <span asp-validation-for="UsuarioModificacaoId" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsValid" /> @Html.DisplayNameFor(model => model.IsValid)
-                </label>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Salvar" class="btn btn-success" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Voltar</a>
 </div>
 
 @section Scripts {
