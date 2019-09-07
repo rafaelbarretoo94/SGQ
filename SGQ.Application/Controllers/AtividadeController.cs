@@ -7,6 +7,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using SGQ.Application.Models;
 using SGQ.Domain.Entities;
 using SGQ.Service.Interfaces;
@@ -18,6 +19,7 @@ namespace SGQ.Application.Controllers
     {
         private readonly IAtividadeService _atividadeService;
         private readonly IProcessoService _processoService;
+        private readonly string _api = "https://localhost:44334/api/atividade";
 
         public AtividadeController(IMapper mapper, 
             IAtividadeService atividadeService,
@@ -30,8 +32,10 @@ namespace SGQ.Application.Controllers
 
         public IActionResult Index()
         {
+            var resultTask = ClientGetAsync(_api);
+            resultTask.Wait();
 
-            IEnumerable<Atividade> listAtividades = _atividadeService.SelecionarTodos();
+            IEnumerable<Atividade> listAtividades = JsonConvert.DeserializeObject<List<Atividade>>(resultTask.Result);
             IEnumerable<AtividadeViewModel> listAtividadeViewModel = _mapper.Map<IEnumerable<Atividade>, IEnumerable<AtividadeViewModel>>(listAtividades);
          
             foreach (var atividadeViewModel in listAtividadeViewModel)
@@ -67,7 +71,9 @@ namespace SGQ.Application.Controllers
 
                 entityAtividade.UsuarioCadastroId = usuarioAtualId;
                 entityAtividade.UsuarioModificacaoId = usuarioAtualId;
-                _atividadeService.Adicionar(entityAtividade);
+
+                string jsonContent = JsonConvert.SerializeObject(entityAtividade);
+                var resultTask = ClientPostAsync(_api, jsonContent);
                 return RedirectToAction("Index");
             }
             return View();
