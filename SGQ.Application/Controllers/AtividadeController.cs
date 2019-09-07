@@ -17,17 +17,11 @@ namespace SGQ.Application.Controllers
     [Authorize]
     public class AtividadeController : BaseController
     {
-        private readonly IAtividadeService _atividadeService;
-        private readonly IProcessoService _processoService;
+        private readonly string _apiProcessos = "https://localhost:44334/api/processo";
         private readonly string _api = "https://localhost:44334/api/atividade";
 
-        public AtividadeController(IMapper mapper, 
-            IAtividadeService atividadeService,
-            IProcessoService processoService, 
-            IConfiguration config) : base(mapper, config)
+        public AtividadeController(IMapper mapper, IConfiguration config) : base(mapper, config)
         {
-            _processoService = processoService;
-            _atividadeService = atividadeService;
         }
 
         public IActionResult Index()
@@ -54,7 +48,10 @@ namespace SGQ.Application.Controllers
 
         public IActionResult Create()
         {
-            var listProcessos = _processoService.SelecionarTodos();
+            var resultTask = ClientGetAsync(_apiProcessos);
+            resultTask.Wait();
+
+            var listProcessos = JsonConvert.DeserializeObject<List<Processo>>(resultTask.Result);
             ViewBag.lstProcessos = listProcessos.Select(x => new { x.Id, x.Nome });
 
             return View();

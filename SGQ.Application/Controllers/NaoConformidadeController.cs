@@ -19,22 +19,17 @@ namespace SGQ.Application.Controllers
     [Authorize]
     public class NaoConformidadeController : BaseController
     {
-        private readonly INaoConformidadeService _naoConformidadeService;
         private readonly IEnumBaseService _enumBaseService;
-        private readonly IProcessoService _processoService;
         private readonly IUsuarioService _usuarioService;
+        private readonly string _apiProcessos = "https://localhost:44334/api/processo";
         private readonly string _api = "https://localhost:44353/api/naoconformidade";
 
         public NaoConformidadeController(IMapper mapper,
-            INaoConformidadeService naoConformidadeService,
             IEnumBaseService enumBaseService,
-            IProcessoService processoService,
             IUsuarioService usuarioService, 
             IConfiguration config) : base(mapper, config)
         {
-            _naoConformidadeService = naoConformidadeService;
             _enumBaseService = enumBaseService;
-            _processoService = processoService;
             _usuarioService = usuarioService;
         }
 
@@ -89,8 +84,11 @@ namespace SGQ.Application.Controllers
 
         public void CarregarViewBags()
         {
+            var resultTask = ClientGetAsync(_apiProcessos);
+            resultTask.Wait();
+
+            var listProcessos = JsonConvert.DeserializeObject<List<Processo>>(resultTask.Result);
             var listTipoNaoConformidade = _enumBaseService.ObterEnumBasePorTipo("TipoNaoConformidade");
-            var listProcessos = _processoService.SelecionarTodos();
             var listUsuarios = _usuarioService.SelecionarTodos();
 
             ViewBag.lstTipoNaoConformidade = listTipoNaoConformidade.Select(x => new { x.Id, x.Valor });
