@@ -36,9 +36,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - IncidentesProblemas", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Processos", "3 - Processos", "{CCEDE66E-A29B-45E9-9B9D-A0E28A117096}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IncidentesProblemasAPI", "IncidentesProblemasAPI\IncidentesProblemasAPI.csproj", "{75992C5D-1826-4B94-8789-4082D08BCDD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SGQ.IncidentesProblemas.API", "IncidentesProblemasAPI\SGQ.IncidentesProblemas.API.csproj", "{75992C5D-1826-4B94-8789-4082D08BCDD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcessosAPI", "ProcessosAPI\ProcessosAPI.csproj", "{70FF1EE6-5664-482A-AED5-35870F4FFF5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SGQ.Processos.API", "ProcessosAPI\SGQ.Processos.API.csproj", "{70FF1EE6-5664-482A-AED5-35870F4FFF5E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
