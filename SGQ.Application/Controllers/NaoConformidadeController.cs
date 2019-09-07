@@ -21,8 +21,8 @@ namespace SGQ.Application.Controllers
     {
         private readonly IEnumBaseService _enumBaseService;
         private readonly IUsuarioService _usuarioService;
-        private readonly string _apiProcessos = "https://localhost:44334/api/processo";
-        private readonly string _api = "https://localhost:44353/api/naoconformidade";
+        private readonly string _apiProcessos;
+        private readonly string _api;
 
         public NaoConformidadeController(IMapper mapper,
             IEnumBaseService enumBaseService,
@@ -31,6 +31,8 @@ namespace SGQ.Application.Controllers
         {
             _enumBaseService = enumBaseService;
             _usuarioService = usuarioService;
+            _apiProcessos = config["ProcessosApiEndpoint"];
+            _api = config["IncidentesProblemasApiEndpoint"];
         }
 
         public IActionResult Index()
